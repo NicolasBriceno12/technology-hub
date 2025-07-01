@@ -1,0 +1,257 @@
+
+*{
+    margin: 0;
+    padding: 0;
+  }
+  
+  html{
+    scroll-behavior: smooth;
+  }
+  
+  /* HEADER CSS */
+  
+  header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 110px;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+    background-color: white;
+  }
+
+  header h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 1000;
+    font-size: 40px;
+  }
+  
+  header button img {
+    width: 100px;
+    height: 80%;
+    padding: 0px;
+    margin: 5px;
+  }
+  
+  header button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  header button:hover {
+    border: 1px;
+  }
+  header button:active {
+    transform: scale(0.9, 0.9);
+  }
+  
+  .logo {
+    width: 100px;
+    height: 90%;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    border-radius: 30px;
+  }
+  
+  .lupa button img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .cajaTexto {
+    width: 1000px;
+    height: 50px;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+
+  /* Menu desplegable de usuario */
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.menu-label img {
+  width: 90px;
+  cursor: pointer;
+}
+
+.menu {
+  display: none;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  border: solid #000;
+  min-width: 160px;
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  border-radius: 15px;
+}
+
+.menu a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.menu a:hover {
+  background-color: #ddd;
+  border-radius: 15px;
+}
+
+input[type="checkbox"]:checked ~ .menu {
+  display: block;
+}
+
+.menu_usuario {
+  position: relative;
+  display: inline-block;
+}
+
+  
+  /*  NAV CSS */
+  
+  nav {
+    height: 60px;
+    background-color: rgb(142, 101, 165);
+    position: sticky;
+    top: 110px;
+    z-index: 1;
+    padding-top: 15px;
+  }
+  
+  nav ul li a{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+  }
+  
+  /* LISTA DESPLEGABLE */
+  
+  nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    gap: 8%;
+  }
+  
+  nav ul a {
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  nav ul li:hover {
+    background: #7d4096;
+    border-radius: 15px;
+    
+  }
+ 
+  .vl {
+    border-left: 2px solid rgb(0, 0, 0);
+    height: 40px;
+  } /* Linea vertical*/
+  
+  
+  /* Contenedor */
+
+  .Contenedor{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 5%;
+    margin-top: 2%;
+    margin-bottom: 0;
+    height: 630px;
+    width: 90%;
+    background-color: #9d9a9e;
+    border:solid #000000;
+    border-radius: 20px;
+  }
+
+.superior {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 90% ;
+  padding-top: 3%;
+}
+
+.izquierda {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-contenedor {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+}
+
+.buscador {
+  padding: 10px;
+  font-size: 16px;
+  width: 250px;
+}
+
+.texto-superior {
+  font-size: 40px;
+  font-weight: bold;
+  color: #333;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+  
+
+  /* TABLA */
+
+  .tabla-excel {
+    width: 90%;
+    height: 60%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .tabla-excel th, .tabla-excel td {
+    border: 1px solid #000000;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .tabla-excel thead {
+    background-color: #b487f0; /* color similar a encabezado de Excel */
+  }
+  
+  .tabla-excel tbody tr:nth-child(even) {
+    background-color: #9eb9c9; /* filas alternadas */
+  }
+
+  .tabla-excel tbody{
+    background-color: #ffffff;
+    height: 50px;
+  }
+
+  td img{
+    height: 40px;
+    padding: 0;
+  }
+  
+  

@@ -1,0 +1,274 @@
+*{
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* HEADER CSS */
+  
+  header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 110px;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+    background-color: white;
+  }
+  
+  header button img {
+    width: 100px;
+    height: 80%;
+    padding: 0px;
+    margin: 5px;
+  }
+  
+  header button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  header button:hover {
+    border: 1px;
+  }
+  header button:active {
+    transform: scale(0.9, 0.9);
+  }
+  
+  .logo {
+    width: 100px;
+    height: 90%;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+  }
+  
+  .lupa button img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .cajaTexto {
+    width: 1000px;
+    height: 50px;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+  
+/* Menu desplegable de usuario */
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.menu-label img {
+  width: 90px;
+  cursor: pointer;
+}
+
+.menu {
+  display: none;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  border: solid #000;
+  min-width: 160px;
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  border-radius: 15px;
+}
+
+.menu a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.menu a:hover {
+  background-color: #ddd;
+  border-radius: 15px;
+}
+
+input[type="checkbox"]:checked ~ .menu {
+  display: block;
+}
+
+.menu_usuario {
+  position: relative;
+  display: inline-block;
+}
+
+  /*  NAV CSS */
+  
+  nav {
+    height: 60px;
+    background-color: rgb(142, 101, 165);
+    position: sticky;
+    top: 110px;
+    z-index: 1;
+    padding-top: 15px;
+  }
+  
+  nav ul li a{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+  }
+  
+  /* LISTA DESPLEGABLE */
+  
+  nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+  }
+  
+  nav ul a {
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  nav ul li:hover {
+    background: #7d4096;
+    border-radius: 15px;
+    
+  }
+  
+  nav ul li {
+    position: relative;
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    background: #eee;
+    padding: 0;
+    border-radius: 15px;
+    border: 2px solid #000000;
+  }
+  
+  nav ul ul li {
+    float: none;
+    width: 250px;
+  }
+  
+  nav ul li:hover > ul {
+    display: block;
+  }
+  
+  .vl {
+    border-left: 2px solid rgb(0, 0, 0);
+    height: 40px;
+  } /* Linea vertical*/
+
+  /* Inicio*/
+
+  main{
+    display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  }
+
+  .contenedor{
+    width: 80%;
+    margin-left: 17%;
+    
+
+  }
+
+  .productos-1 {
+    width: 38%;
+    height: 450px;
+    margin: 3%;
+    float: left;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 0px 20px 10px #7e4096b9;
+    border: 2px solid #000000;
+    padding: 0%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+
+  .productos-2 {
+    width: 27%;
+    height: 450px;
+    margin: 3%;
+    float: left;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 0px 20px 10px #7e4096b9;
+    border: 2px solid #000000;
+
+    padding: 0%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .productos-3 {
+    width: 71%;
+    height: 500px;
+    margin: 3%;
+    float: left;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 0px 20px 10px #7e4096b9;
+    border: 2px solid #000000;
+    padding: 0%;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .contenedor img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    padding: 0%;
+    margin: 0%;
+    border-radius: 0%;
+  }
+
+  #caja_destacados{
+    width: 30%;
+    height: 75px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px 10px #7e4096b9;
+    border: 2px solid #000000;
+    margin-top: 30px;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 13px;
+  }
+  
+  #caja_destacados h1{
+    margin-top: 15px;
+  }
+  

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechnologyHub</title>
+    <link rel="stylesheet" href="/frontend/css/gestion_inventario.css">
+</head>
+<body>
+    <header>
+        <div class="logo"> 
+        <img src="imagenes3/Logo.png">
+        </div>      
+        <h1>MENÚ DE EMPLEADOS</h1>
+        <div class="iconoUsuario">
+        
+            <!-- BOTON DE USUARIO -->
+
+      <div class="menu_usuario">
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="menu-label">
+          <img src="Imagenes/iconoUsuario.png" alt="Menú" />
+        </label>
+        <div class="menu">
+          <a href="inicio.html">USUARIO</a>
+          <a href="gestion_comentarios.html">EMPLEADO</a>
+          <a href="usuarios.html">ADMINISTRADOR</a>
+          <a href="login.html">CERRAR SESION</a>
+        </div>
+      </div>
+        </div>
+    </header>
+<nav>
+    <ul>
+        <li>
+            <a href="gestion_comentarios.html">GESTION DE COMENTARIOS</a>
+        </li>
+        <p class="vl"></p>
+        <li>
+            <a href="gestion_inventario.html">GESTION DE INVENTARIO</a>
+        </li>
+            <p class="vl"></p>
+        <li>
+            <a href="gestion_ventas.html">GESTION DE VENTAS</a>
+        </li>
+    </ul>
+</nav>
+<div class="busqueda">
+    <button><img src="imagenes3/lupa.png" alt="buscar"></button>
+    <input placeholder="Ingrese aquí el nombre del producto que desea hacerles cambios">
+</div>
+<main class="contenido-principal">
+    <section class="producto">
+        <img src="imagenes3/pc ryzen 7.png" alt="PC Ryzen 7" class="imagen-pc">
+        <h2><span class="etiqueta">Pc Torre Ryzen 7</span></h2>
+        <button class="editar-icono"><img src="imagenes3/editar.png"></button>
+    </section>
+    <section class="descripcion">
+    <div class="texto">
+        <input type="text" placeholder="Editar Producto"  class="input-descripcion"> 
+        <button class="editar-icono"><img src="imagenes3/editar.png" ></button>
+    </div>
+    <div class="unidades">
+        <span>Unidades disponibles:</span>
+        <input type="number" value="11">
+    </div>
+    <section class="botones">
+        <button class="btn agregar">AGREGAR PRODUCTO</button>
+        <button class="btn eliminar">ELIMINAR PRODUCTO</button>
+        <button class="btn modificar">MODIFICAR PRODUCTO</button>
+    </section>
+</main>
+</body>
+</html>

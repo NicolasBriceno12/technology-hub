@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/frontend/css/gestion_ventas.css" />
+    <title>TechnologyHub</title>
+  </head>
+  <body>
+    <!-- ENCABEZADO DE LA PAGINA -->
+
+    <header>
+      <img class="logo" src="imagenes3/Logo.png">
+      <h1>MENÚ DE EMPLEADOS</h1>
+      <div class="iconoUsuario">
+      
+          <!-- BOTON DE USUARIO -->
+
+    <div class="menu_usuario">
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-label">
+        <img src="Imagenes/iconoUsuario.png" alt="Menú" />
+      </label>
+      <div class="menu">
+        <a href="inicio.html">USUARIO</a>
+        <a href="gestion_comentarios.html">EMPLEADO</a>
+        <a href="usuarios.html">ADMINISTRADOR</a>
+        <a href="login.html">CERRAR SESION</a>
+      </div>
+    </div>
+      </div>
+  </header>
+
+    <!--  MENU DESPLEGABLE NAVEGADOR -->
+
+    <nav>
+      <ul>
+          <li>
+              <a href="gestion_comentarios.html">GESTION DE COMENTARIOS</a>
+          </li>
+          <p class="vl"></p>
+          <li>
+              <a href="gestion_inventario.html">GESTION DE INVENTARIO</a>
+          </li>
+              <p class="vl"></p>
+          <li>
+              <a href="gestion_ventas.html">GESTION DE VENTAS</a>
+          </li>
+      </ul>
+  </nav>
+
+    <main>
+      <div class="Contenedor">
+        <div class="superior">
+          <p class="texto-superior">GESTION DE VENTAS</p>
+          <div class="izquierda">
+            <a href=""><img
+              src="Imagenes/iconoLupa.png"
+              alt="Logo"
+              class="logo-contenedor"
+            /></a>
+            <input type="text" placeholder="Ingrese el numero de la venta" class="buscador" />
+          </div>
+        </div>
+        <table class="tabla-excel">
+          <colgroup>
+            <col style="width: 10%" />
+            <col style="width: 50%" />
+            <col style="width: 30%" />
+            <col style="width: 5%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th># de venta</th>
+              <th>Descripcion</th>
+              <th>Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Descripcion venta 1</td>
+              <td>Completado</td>
+              <td><a href="ventas.html"><img src="Imagenes/iconoLupa.png" alt=""></a></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Descripcion venta 2</td>
+              <td>Enviado</td>
+              <td><a href="ventas.html"><img src="Imagenes/iconoLupa.png" alt=""></a></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Descripcion venta 3</td>
+              <td>Cancelado</td>
+              <td><a href="ventas.html"><img src="Imagenes/iconoLupa.png" alt=""></a></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>

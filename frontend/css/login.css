@@ -1,0 +1,74 @@
+/* login.css */
+
+body.formularios {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #5e3c99, #8e44ad);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.logincontainer {
+    background-color: #ffffff;
+    color: #4b0082;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.logincontainer h1 {
+    margin-bottom: 10px;
+    font-size: 2em;
+    color: #5e3c99;
+}
+
+.logincontainer hr {
+    border: none;
+    height: 2px;
+    background-color: #5e3c99;
+    margin: 10px 0 20px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-container input {
+    width: 100%;
+}
+
+.password-container .icono-ojo {
+    position: absolute;
+    right: 15px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.btnlogin {   
+    width: 90%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;}

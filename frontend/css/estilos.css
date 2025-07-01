@@ -1,0 +1,372 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* HEADER CSS */
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 110px;
+  position: sticky;
+  top: 0px;
+  z-index: 2;
+  background-color: white;
+}
+
+header button img {
+  width: 100px;
+  height: 80%;
+  padding: 0px;
+  margin: 5px;
+}
+
+header button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+header button:hover {
+  border: 1px;
+}
+header button:active {
+  transform: scale(0.9, 0.9);
+}
+
+.logo {
+  width: 100px;
+  height: 90%;
+  margin-left: 30px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+}
+
+.lupa button img {
+  width: 60px;
+  height: 60px;
+}
+
+.cajaTexto {
+  width: 1000px;
+  height: 50px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+/* Menu desplegable de usuario */
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.menu-label img {
+  width: 90px;
+  cursor: pointer;
+}
+
+.menu {
+  display: none;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border: solid #000;
+  min-width: 160px;
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  border-radius: 15px;
+}
+
+.menu a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.menu a:hover {
+  background-color: #ddd;
+  border-radius: 15px;
+}
+
+input[type="checkbox"]:checked ~ .menu {
+  display: block;
+}
+
+.menu_usuario {
+  position: relative;
+  display: inline-block;
+}
+
+/*  NAV CSS */
+
+nav {
+  height: 60px;
+  background-color: rgb(142, 101, 165);
+  position: sticky;
+  top: 110px;
+  z-index: 1;
+  padding-top: 15px;
+}
+
+nav ul li a {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+}
+
+/* LISTA DESPLEGABLE */
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+}
+
+nav ul a {
+  display: block;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav ul li:hover {
+  background: #7d4096;
+  border-radius: 15px;
+}
+
+nav ul li {
+  position: relative;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 25%;
+  background: #eee;
+  padding: 0;
+  border-radius: 15px;
+  border: 2px solid #000000;
+}
+
+nav ul ul li {
+  float: none;
+  width: 250px;
+}
+
+nav ul li:hover > ul {
+  display: block;
+}
+
+.vl {
+  border-left: 2px solid rgb(0, 0, 0);
+  height: 40px;
+} /* Linea vertical*/
+
+.categoria {
+  scroll-margin-top: 300px;
+}
+
+.subcategoria {
+  scroll-margin-top: 280px;
+}
+
+/* CONTENIDO PAGINA (BODY)*/
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#principal {
+  width: 75%;
+}
+#filtros {
+  width: 25%;
+}
+
+.productos {
+  width: 23%;
+  height: 450px;
+  margin: 3%;
+  float: left;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0px 0px 20px 10px #7e4096b9;
+  border: 2px solid #000000;
+}
+
+.productos img {
+  width: 80%;
+  height: 50%;
+  vertical-align: top;
+  text-align: center;
+  padding-top: 30px;
+  border-radius: 15%;
+  object-fit: cover;
+  margin-bottom: 12%;
+}
+
+.descripcion {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  font-size: large;
+}
+
+.precio {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+  font-weight: bold;
+  margin: 3%;
+}
+
+.boton-carrito {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20%; /* espacio entre imagen y texto */
+  border: 3px solid #7d4096;
+  background-color: #e0c6f5;
+  color: #000;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 10%;
+  width: 70%;
+}
+.boton-carrito img {
+  width: 24px;
+  height: 24px;
+  align-items: right;
+}
+
+.boton-carrito:hover {
+  transform: scale(1.05);
+}
+
+.boton-carrito button {
+  cursor: pointer;
+}
+
+#caja_filtros {
+  width: 90%;
+  height: 450px;
+  margin-top: 30%;
+  float: center;
+  border-radius: 30px;
+  box-shadow: 0px 0px 20px 10px #7e4096b9;
+  border: 0px solid #000000;
+  position: sticky;
+  top: 30%;
+}
+
+.caja_categoria {
+  width: 30%;
+  height: 60px;
+  border-radius: 30px;
+  box-shadow: 0px 0px 20px 10px #7e4096b9;
+  border: 2px solid #000000;
+  margin-top: 30px;
+  margin-left: 35%;
+  margin-right: 65%;
+  text-align: center;
+  padding-top: 15px;
+}
+
+.caja_subcategoria {
+  width: 30%;
+  height: 75px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 0px 0px 20px 10px #7e4096b9;
+  border: 2px solid #000000;
+  margin-top: 30px;
+  text-align: center;
+  background-color: rgba(142, 101, 165, 0.87);
+}
+
+.caja_subcategoria h1 {
+  margin-top: 15px;
+}
+
+main h1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+main div div div {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* CAJA FILTROS */
+
+.caja_filtros {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.caja_filtros h1 {
+  text-align: center;
+}
+
+.caja_filtros p {
+  padding: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.opciones_filtro {
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  align-items: left;
+  padding: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.boton_filtro {
+  width: 30%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background-color: #c396d4;
+  cursor: pointer;
+}
+
+.boton_filtro:hover{
+  transform: scale(1.02,1.02);
+}
+
+.boton_filtro:active{
+  transform: scale(0.9,0.9);
+}
+

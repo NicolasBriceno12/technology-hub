@@ -1,0 +1,121 @@
+body.formularios {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #5e3c99, #8e44ad);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+.registrocontainer {
+    background-color: #fff;
+    color: #4a148c;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    max-width: 900px;
+    width: 100%;
+}
+
+.registrocontainer h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #5e3c99;
+}
+
+.registrocontainer hr {
+    border: none;
+    height: 2px;
+    background-color: #b39ddb;
+    margin: 10px 0 25px;
+}
+
+.Cuestionario {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.columna {
+    flex: 1;
+    min-width: 300px;
+}
+
+.fila {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.fecha input {
+    width: calc(50% - 10px);
+}
+
+.columna.derecha {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.columna.derecha label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.columna.derecha input[type="radio"] {
+    margin-right: 8px;
+}
+
+label.o {
+    display: block;
+    text-align: center;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #6a1b9a;
+}
+
+.btncontinuar {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #6a1b9a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.btncontinuar:hover {
+    background-color: #4a148c;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .Cuestionario {
+        flex-direction: column;
+    }
+
+    .fila {
+        flex-direction: column;
+    }
+
+    .fecha input {
+        width: 100%;
+    }
+}

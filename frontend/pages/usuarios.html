@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/frontend/css/usuarios.css" />
+    <title>TechnologyHub</title>
+</head>
+<body>
+    <!-- ENCABEZADO DE LA PAGINA -->
+
+    <header>
+      <img class="logo" src="imagenes3/Logo.png">     
+      <h1>MENÚ DE ADMINISTRADORES</h1>
+      <div class="iconoUsuario">
+      
+          <!-- BOTON DE USUARIO -->
+
+    <div class="menu_usuario">
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-label">
+        <img src="Imagenes/iconoUsuario.png" alt="Menú" />
+      </label>
+      <div class="menu">
+        <a href="inicio.html">USUARIO</a>
+        <a href="gestion_comentarios.html">EMPLEADO</a>
+        <a href="usuarios.html">ADMINISTRADOR</a>
+        <a href="login.html">CERRAR SESION</a>
+      </div>
+    </div>
+      </div>
+  </header>
+  
+      <!--  MENU DESPLEGABLE NAVEGADOR -->
+  
+      <nav>
+        <ul>
+            <li>
+                <a href="gestion_comentarios.html">GESTION DE COMENTARIOS</a>
+            </li>
+            <p class="vl"></p>
+            <li>
+                <a href="gestion_inventario.html">GESTION DE INVENTARIO</a>
+            </li>
+                <p class="vl"></p>
+            <li>
+                <a href="gestion_ventas.html">GESTION DE VENTAS</a>
+            </li>
+            <p class="vl"></p>
+            <li>
+                <a href="usuarios.html">GESTION DE USUARIOS</a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+
+      <div class="columnas">
+        <div class="izquierda">
+          <div class="izquierda_arriba">
+          <img src="Imagenes/iconoLupa.png" alt="">
+          <input type="text" placeholder="Ingrese el id del usuario o el nombre">
+        </div>
+          <table class="tabla-excel">
+            <colgroup>
+              <col style="width: 50%" />
+              <col style="width: 20%" />
+              <col style="width: 20%" />
+              <col style="width: 10%" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Nombre usuario</th>
+                <th># de identidad</th>
+                <th>Rol</th>
+                <th>Permisos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Nicolas Mauricio Briceño Martinez</td>
+                <td>1007603779</td>
+                <td>Administrador</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>Nicolas Mauricio Briceño Martinez</td>
+                <td>1007603779</td>
+                <td>Administrador</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>Nicolas Mauricio Briceño Martinez</td>
+                <td>1007603779</td>
+                <td>Administrador</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="derecha">
+          <button class="boton"><span>AGREGAR USUARIO</span></button>
+          <button class="boton"><span>ELIMINAR USUARIO</span></button>
+          <button class="boton"><span>MODIFICAR USUARIO</span></button>
+        </div>
+      </div>
+
+    </main>
+    
+</body>
+</html>

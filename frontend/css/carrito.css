@@ -1,0 +1,298 @@
+*{
+    margin: 0;
+    padding: 0;
+  }
+  
+  html{
+    scroll-behavior: smooth;
+  }
+  
+  /* HEADER CSS */
+  
+  header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 110px;
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+    background-color: white;
+  }
+  
+  header button img {
+    width: 100px;
+    height: 80%;
+    padding: 0px;
+    margin: 5px;
+  }
+  
+  header button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  header button:hover {
+    border: 1px;
+  }
+  header button:active {
+    transform: scale(0.9, 0.9);
+  }
+  
+  .logo {
+    width: 100px;
+    height: 90%;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+  }
+  
+  .lupa button img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .cajaTexto {
+    width: 1000px;
+    height: 50px;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
+
+  /* Menu desplegable de usuario */
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.menu-label img {
+  width: 90px;
+  cursor: pointer;
+}
+
+.menu {
+  display: none;
+  background-color: #f1f1f1;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  border: solid #000;
+  min-width: 160px;
+  position: absolute;
+  z-index: 10;
+  right: 0;
+  border-radius: 15px;
+}
+
+.menu a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.menu a:hover {
+  background-color: #ddd;
+  border-radius: 15px;
+}
+
+input[type="checkbox"]:checked ~ .menu {
+  display: block;
+}
+
+.menu_usuario {
+  position: relative;
+  display: inline-block;
+}
+  
+  /*  NAV CSS */
+  
+  nav {
+    height: 60px;
+    background-color: rgb(142, 101, 165);
+    position: sticky;
+    top: 110px;
+    z-index: 1;
+    padding-top: 15px;
+  }
+  
+  nav ul li a{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+  }
+  
+  /* LISTA DESPLEGABLE */
+  
+  nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+  }
+  
+  nav ul a {
+    display: block;
+    color: #000000;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 15px;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  nav ul li:hover {
+    background: #7d4096;
+    border-radius: 15px;
+    
+  }
+  
+  nav ul li {
+    position: relative;
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    background: #eee;
+    padding: 0;
+    border-radius: 15px;
+    border: 2px solid #000000;
+  }
+  
+  nav ul ul li {
+    float: none;
+    width: 250px;
+  }
+  
+  nav ul li:hover > ul {
+    display: block;
+  }
+  
+  .vl {
+    border-left: 2px solid rgb(0, 0, 0);
+    height: 40px;
+  } /* Linea vertical*/
+  
+  .categoria{
+    scroll-margin-top: 300px;
+  }
+  
+  .subcategoria{
+    scroll-margin-top: 280px;
+  }
+  
+     
+     body {
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .carrito {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .productos {
+      background-color: #f3f3f3;
+      padding: 20px;
+      border-radius: 15px;
+      width: 65%;
+    }
+    
+    .producto {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 15px;
+      background-color: white;
+    }
+    
+    .producto img {
+      width: 60px;
+    }
+    
+    .producto-info {
+      flex-grow: 1;
+      padding: 0 15px;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .producto-nombre {
+      font-weight: bold;
+    }
+    
+    .cantidad-control {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    .cantidad-control button {
+      background-color: #d3c1e5;
+      border: none;
+      padding: 5px 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .cantidad-control input {
+      width: 30px;
+      text-align: center;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+    
+    .resumen {
+      background-color: #e4e4e4;
+      padding: 20px;
+      border-radius: 15px;
+      width: 30%;
+    }
+    
+    .resumen p {
+      margin: 5px 0;
+    }
+    
+    .resumen strong {
+      font-size: 16px;
+    }
+    
+    .boton-continuar {
+      background-color: #a583bd;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    
+    .boton-continuar:hover {
+      background-color: #8e6fa8;
+    }
+    
+    .eliminar {
+      color: red;
+      font-size: 20px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  

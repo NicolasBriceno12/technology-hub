@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/registro.css">
+    <title>TechnologyHub - Registro</title>
+</head>
+<body class="formularios">
+    <div class="registrocontainer">
+        <h1>Formulario de Registro</h1>
+        <hr>
+        <form id="formRegistro" class="formulario">
+            <div class="columna izquierda">
+                <div class="fila">
+                    <input type="text" id="nombre" placeholder="Ingrese sus nombres" required>
+                    <input type="text" id="apellidos" placeholder="Ingrese sus apellidos">
+                </div>
+                <div class="fila">
+                    <select id="tipoDocumento">
+                        <option value="CC">C.C.</option>
+                        <option value="TI">T.I.</option>
+                        <option value="CE">Cedula de Extranjería</option>
+                    </select>
+                    <input type="text" id="numeroDocumento" placeholder="Ingrese su numero de documento">
+                </div>
+                <div>
+                    <input type="text" id="direccion" placeholder="Dirección">
+                    <select id="ciudad">
+                        <option value="">Seleccione Ciudad</option>
+                        <option value="Bogota">Bogotá</option>
+                        <option value="Cali">Cali</option>
+                        <option value="Medellin">Medellín</option>
+                        <option value="Barranquilla">Barranquilla</option>
+                    </select>
+                </div>
+                <div class="fila fecha">
+                   <label>Fecha de Nacimiento</label>
+                   <input type="number" id="dia" placeholder="Día" min="1" max="31">
+                   <input type="number" id="mes" placeholder="Mes" min="1" max="12">
+                   <input type="number" id="ano" placeholder="Año" min="1900" max="2010">
+                </div>
+                <div>
+                    <input type="email" id="correo" placeholder="Ingrese su correo" required>
+                    <input type="email" id="confirmarCorreo" placeholder="Confirme su correo" required>
+                </div>
+            </div>
+            <hr>
+            <div class="columna derecha">
+                <input type="password" id="contrasena" placeholder="Ingrese su contraseña" required minlength="6">
+                <input type="password" id="confirmarContrasena" placeholder="Confirme su contraseña" required>
+                <label><input type="checkbox" id="aceptarTerminos" required>Aceptar uso de datos</label>
+                <button type="submit" class="btnregistrar">Registrar</button>
+            </div>
+        </form>
+        
+        <!-- Mensaje de estado -->
+        <div id="mensaje" style="margin-top: 15px; padding: 10px; border-radius: 5px; display: none;"></div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="login.html" style="color: #007bff; text-decoration: none;">¿Ya tienes cuenta? Inicia sesión aquí</a>
+        </div>
+    </div>
+
+    <script>
+    function mostrarMensaje(texto, tipo) {
+        const mensaje = document.getElementById('mensaje');
+        mensaje.textContent = texto;
+        mensaje.style.display = 'block';
+        
+        if (tipo === 'exito') {
+            mensaje.style.backgroundColor = '#d4edda';
+            mensaje.style.color = '#155724';
+            mensaje.style.border = '1px solid #c3e6cb';
+        } else {
+            mensaje.style.backgroundColor = '#f8d7da';
+            mensaje.style.color = '#721c24';
+            mensaje.style.border = '1px solid #f5c6cb';
+        }
+        
+        // Ocultar mensaje después de 5 segundos
+        setTimeout(() => {
+            mensaje.style.display = 'none';
+        }, 5000);
+    }
+
+    function validarFormulario() {
+        const nombre = document.getElementById('nombre').value.trim();
+        const correo = document.getElementById('correo').value.trim();
+        const confirmarCorreo = document.getElementById('confirmarCorreo').value.trim();
+        const contrasena = document.getElementById('contrasena').value;
+        const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+        const aceptarTerminos = document.getElementById('aceptarTerminos').checked;
+
+        // Validar campos obligatorios
+        if (!nombre || !correo || !contrasena) {
+            mostrarMensaje('Por favor complete todos los campos obligatorios', 'error');
+            return false;
+        }
+
+        // Validar email
+        if (!correo.includes('@') || !correo.includes('.')) {
+            mostrarMensaje('Por favor ingrese un correo válido', 'error');
+            return false;
+        }
+
+        // Validar que los correos coincidan
+        if (correo !== confirmarCorreo) {
+            mostrarMensaje('Los correos no coinciden', 'error');
+            return false;
+        }
+
+        // Validar contraseña
+        if (contrasena.length < 6) {
+            mostrarMensaje('La contraseña debe tener al menos 6 caracteres', 'error');
+            return false;
+        }
+
+        // Validar que las contraseñas coincidan
+        if (contrasena !== confirmarContrasena) {
+            mostrarMensaje('Las contraseñas no coinciden', 'error');
+            return false;
+        }
+
+        // Validar términos
+        if (!aceptarTerminos) {
+            mostrarMensaje('Debe aceptar el uso de datos', 'error');
+            return false;
+        }
+
+        return true;
+    }
+
+    document.getElementById('formRegistro').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        if (!validarFormulario()) {
+            return;
+        }
+
+        const nombre = document.getElementById('nombre').value.trim();
+        const correo = document.getElementById('correo').value.trim();
+        const contrasena = document.getElementById('contrasena').value;
+
+        // Deshabilitar botón mientras se procesa
+        const btnSubmit = document.querySelector('.btnregistrar');
+        const textoOriginal = btnSubmit.textContent;
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = 'Registrando...';
+
+        try {
+            const res = await fetch('http://localhost:3000/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre, correo, contrasena })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                mostrarMensaje(data.mensaje, 'exito');
+                
+                // Limpiar formulario
+                document.getElementById('formRegistro').reset();
+                
+                // Redirigir al login después de 3 segundos
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 3000);
+            } else {
+                mostrarMensaje(data.error || 'Error en el registro', 'error');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            mostrarMensaje('Error de conexión. Verifique que el servidor esté funcionando.', 'error');
+        } finally {
+            // Rehabilitar botón
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = textoOriginal;
+        }
+    });
+
+    // Validación en tiempo real para confirmación de correo
+    document.getElementById('confirmarCorreo').addEventListener('blur', function() {
+        const correo = document.getElementById('correo').value;
+        const confirmarCorreo = this.value;
+        
+        if (correo && confirmarCorreo && correo !== confirmarCorreo) {
+            this.style.borderColor = '#dc3545';
+            mostrarMensaje('Los correos no coinciden', 'error');
+        } else if (correo === confirmarCorreo) {
+            this.style.borderColor = '#28a745';
+        }
+    });
+
+    // Validación en tiempo real para confirmación de contraseña
+    document.getElementById('confirmarContrasena').addEventListener('blur', function() {
+        const contrasena = document.getElementById('contrasena').value;
+        const confirmarContrasena = this.value;
+        
+        if (contrasena && confirmarContrasena && contrasena !== confirmarContrasena) {
+            this.style.borderColor = '#dc3545';
+            mostrarMensaje('Las contraseñas no coinciden', 'error');
+        } else if (contrasena === confirmarContrasena) {
+            this.style.borderColor = '#28a745';
+        }
+    });
+    </script>
+</body>
+</html>
