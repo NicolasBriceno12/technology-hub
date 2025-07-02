@@ -13,42 +13,55 @@
         <form id="formRegistro" class="formulario">
             <div class="columna izquierda">
                 <div class="fila">
-                    <input type="text" id="nombre" placeholder="Ingrese sus nombres" required>
-                    <input type="text" id="apellidos" placeholder="Ingrese sus apellidos">
+                    <input type="text" id="nombres" placeholder="Ingrese sus nombres" required>
+                    <input type="text" id="apellidos" placeholder="Ingrese sus apellidos" required>
+                </div>
+                <div class="fila">
+                    <input type="text" id="nombre_usuario" placeholder="Nombre de usuario" required>
                 </div>
                 <div class="fila">
                     <select id="tipoDocumento">
+                        <option value="">Tipo de documento</option>
                         <option value="CC">C.C.</option>
                         <option value="TI">T.I.</option>
-                        <option value="CE">Cedula de Extranjería</option>
+                        <option value="CE">Cédula de Extranjería</option>
+                        <option value="PAS">Pasaporte</option>
                     </select>
-                    <input type="text" id="numeroDocumento" placeholder="Ingrese su numero de documento">
+                    <input type="number" id="numeroDocumento" placeholder="Número de documento">
                 </div>
-                <div>
+                <div class="fila">
                     <input type="text" id="direccion" placeholder="Dirección">
-                    <select id="ciudad">
+                    <select id="ciudad" required>
                         <option value="">Seleccione Ciudad</option>
-                        <option value="Bogota">Bogotá</option>
+                        <option value="Bogotá">Bogotá</option>
                         <option value="Cali">Cali</option>
-                        <option value="Medellin">Medellín</option>
+                        <option value="Medellín">Medellín</option>
                         <option value="Barranquilla">Barranquilla</option>
+                        <option value="Cartagena">Cartagena</option>
+                        <option value="Bucaramanga">Bucaramanga</option>
+                        <option value="Pereira">Pereira</option>
+                        <option value="Manizales">Manizales</option>
                     </select>
                 </div>
                 <div class="fila fecha">
                    <label>Fecha de Nacimiento</label>
-                   <input type="number" id="dia" placeholder="Día" min="1" max="31">
-                   <input type="number" id="mes" placeholder="Mes" min="1" max="12">
-                   <input type="number" id="ano" placeholder="Año" min="1900" max="2010">
+                   <input type="date" id="fechaNacimiento" required max="2010-12-31" min="1950-01-01">
                 </div>
-                <div>
+                <div class="fila">
+                    <input type="tel" id="telefono" placeholder="Teléfono (opcional)">
+                </div>
+                <div class="fila">
                     <input type="email" id="correo" placeholder="Ingrese su correo" required>
                     <input type="email" id="confirmarCorreo" placeholder="Confirme su correo" required>
                 </div>
             </div>
             <hr>
             <div class="columna derecha">
-                <input type="password" id="contrasena" placeholder="Ingrese su contraseña" required minlength="6">
-                <input type="password" id="confirmarContrasena" placeholder="Confirme su contraseña" required>
+                <input type="password" id="contraseña" placeholder="Ingrese su contraseña" required minlength="6" maxlength="15">
+                <input type="password" id="confirmarContraseña" placeholder="Confirme su contraseña" required>
+                <div class="password-requirements">
+                    <small>La contraseña debe tener entre 6 y 15 caracteres</small>
+                </div>
                 <label><input type="checkbox" id="aceptarTerminos" required>Aceptar uso de datos</label>
                 <button type="submit" class="btnregistrar">Registrar</button>
             </div>
@@ -85,16 +98,32 @@
     }
 
     function validarFormulario() {
-        const nombre = document.getElementById('nombre').value.trim();
+        const nombres = document.getElementById('nombres').value.trim();
+        const apellidos = document.getElementById('apellidos').value.trim();
+        const nombre_usuario = document.getElementById('nombre_usuario').value.trim();
         const correo = document.getElementById('correo').value.trim();
         const confirmarCorreo = document.getElementById('confirmarCorreo').value.trim();
-        const contrasena = document.getElementById('contrasena').value;
-        const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+        const contraseña = document.getElementById('contraseña').value;
+        const confirmarContraseña = document.getElementById('confirmarContraseña').value;
+        const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+        const ciudad = document.getElementById('ciudad').value;
         const aceptarTerminos = document.getElementById('aceptarTerminos').checked;
 
         // Validar campos obligatorios
-        if (!nombre || !correo || !contrasena) {
+        if (!nombres || !apellidos || !nombre_usuario || !correo || !contraseña || !fechaNacimiento || !ciudad) {
             mostrarMensaje('Por favor complete todos los campos obligatorios', 'error');
+            return false;
+        }
+
+        // Validar nombre de usuario (sin espacios)
+        if (nombre_usuario.includes(' ')) {
+            mostrarMensaje('El nombre de usuario no puede contener espacios', 'error');
+            return false;
+        }
+
+        // Validar longitud del nombre de usuario
+        if (nombre_usuario.length > 20) {
+            mostrarMensaje('El nombre de usuario no puede tener más de 20 caracteres', 'error');
             return false;
         }
 
@@ -111,14 +140,24 @@
         }
 
         // Validar contraseña
-        if (contrasena.length < 6) {
-            mostrarMensaje('La contraseña debe tener al menos 6 caracteres', 'error');
+        if (contraseña.length < 6 || contraseña.length > 15) {
+            mostrarMensaje('La contraseña debe tener entre 6 y 15 caracteres', 'error');
             return false;
         }
 
         // Validar que las contraseñas coincidan
-        if (contrasena !== confirmarContrasena) {
+        if (contraseña !== confirmarContraseña) {
             mostrarMensaje('Las contraseñas no coinciden', 'error');
+            return false;
+        }
+
+        // Validar fecha de nacimiento
+        const fechaNac = new Date(fechaNacimiento);
+        const hoy = new Date();
+        const edad = hoy.getFullYear() - fechaNac.getFullYear();
+        
+        if (edad < 13) {
+            mostrarMensaje('Debe ser mayor de 13 años para registrarse', 'error');
             return false;
         }
 
@@ -138,9 +177,20 @@
             return;
         }
 
-        const nombre = document.getElementById('nombre').value.trim();
-        const correo = document.getElementById('correo').value.trim();
-        const contrasena = document.getElementById('contrasena').value;
+        // Recopilar datos del formulario
+        const formData = {
+            nombres: document.getElementById('nombres').value.trim(),
+            apellidos: document.getElementById('apellidos').value.trim(),
+            nombre_usuario: document.getElementById('nombre_usuario').value.trim(),
+            correo: document.getElementById('correo').value.trim(),
+            contraseña: document.getElementById('contraseña').value,
+            fecha_nacimiento: document.getElementById('fechaNacimiento').value,
+            ciudad: document.getElementById('ciudad').value,
+            direccion: document.getElementById('direccion').value.trim() || null,
+            telefono: document.getElementById('telefono').value.trim() || null,
+            tipo_documento: document.getElementById('tipoDocumento').value || null,
+            numero_documento: document.getElementById('numeroDocumento').value || null
+        };
 
         // Deshabilitar botón mientras se procesa
         const btnSubmit = document.querySelector('.btnregistrar');
@@ -152,7 +202,7 @@
             const res = await fetch('http://localhost:3000/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nombre, correo, contrasena })
+                body: JSON.stringify(formData)
             });
 
             const data = await res.json();
@@ -188,23 +238,82 @@
         if (correo && confirmarCorreo && correo !== confirmarCorreo) {
             this.style.borderColor = '#dc3545';
             mostrarMensaje('Los correos no coinciden', 'error');
-        } else if (correo === confirmarCorreo) {
+        } else if (correo === confirmarCorreo && correo !== '') {
             this.style.borderColor = '#28a745';
         }
     });
 
     // Validación en tiempo real para confirmación de contraseña
-    document.getElementById('confirmarContrasena').addEventListener('blur', function() {
-        const contrasena = document.getElementById('contrasena').value;
-        const confirmarContrasena = this.value;
+    document.getElementById('confirmarContraseña').addEventListener('blur', function() {
+        const contraseña = document.getElementById('contraseña').value;
+        const confirmarContraseña = this.value;
         
-        if (contrasena && confirmarContrasena && contrasena !== confirmarContrasena) {
+        if (contraseña && confirmarContraseña && contraseña !== confirmarContraseña) {
             this.style.borderColor = '#dc3545';
             mostrarMensaje('Las contraseñas no coinciden', 'error');
-        } else if (contrasena === confirmarContrasena) {
+        } else if (contraseña === confirmarContraseña && contraseña !== '') {
             this.style.borderColor = '#28a745';
         }
     });
+
+    // Validación para nombre de usuario
+    document.getElementById('nombre_usuario').addEventListener('blur', function() {
+        const valor = this.value.trim();
+        
+        if (valor.includes(' ')) {
+            this.style.borderColor = '#dc3545';
+            mostrarMensaje('El nombre de usuario no puede contener espacios', 'error');
+        } else if (valor.length > 20) {
+            this.style.borderColor = '#dc3545';
+            mostrarMensaje('El nombre de usuario no puede tener más de 20 caracteres', 'error');
+        } else if (valor.length > 0) {
+            this.style.borderColor = '#28a745';
+        }
+    });
+
+    // Evitar espacios en nombre de usuario
+    document.getElementById('nombre_usuario').addEventListener('keypress', function(e) {
+        if (e.key === ' ') {
+            e.preventDefault();
+        }
+    });
     </script>
+
+    <style>
+    .password-requirements {
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+
+    .password-requirements small {
+        color: #666;
+        font-size: 12px;
+    }
+
+    .fila {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .fila input, .fila select {
+        flex: 1;
+    }
+
+    .fecha {
+        flex-direction: column;
+    }
+
+    .fecha label {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .fecha input[type="date"] {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    </style>
 </body>
 </html>
