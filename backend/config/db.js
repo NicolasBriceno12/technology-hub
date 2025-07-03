@@ -1,15 +1,20 @@
-const mysql = require('mysql2');
-
-const conexion = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'brayan',
-  database: 'tecnologyhub2'
+import dotenv from 'dotenv';
+import mysql from 'mysql2/promise';
+dotenv.config();
+export const pool = mysql.createPool({
+host: process.env.DB_HOST,
+user: process.env.DB_USER,
+password: process.env.DB_PASSWORD,
+database: process.env.DB_NAME,
+waitForConnections: true,
+connectionLimit: process.env.DB_CONN_LIMIT || 10,
 });
-
-conexion.connect((err) => {
-  if (err) throw err;
-  console.log('✅ Conectado a la BD MySQL');
-});
-
-module.exports = conexion;
+(async () => {
+try {
+const connection = await pool.getConnection();
+console.log('✅ Conectado a la base de datos MySQL correctamente');
+connection.release();
+} catch (error) {
+console.error('❌ Error al conectar a la base de datos:', error);
+}
+})();
