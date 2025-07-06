@@ -45,4 +45,3 @@ export const addUsuario = async (usuario) => {
 
   return result;
 };
-

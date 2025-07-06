@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="/frontend/css/carrito.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <title>TechnologyHub - Carrito</title>
+</head>
+<body>
+
+  <!-- 🧭 ENCABEZADO Y MENÚ -->
+  <header>
+    <img src="/frontend/img/imagenes/Logo.png" class="logo" />
+    <div class="lupa">
+      <button><img src="/frontend/img/imagenes/iconoLupa.png" alt="" /></button>
+    </div>
+    <input type="text" class="cajaTexto" placeholder="¿Qué producto te gustaría buscar?" />
+    <button><img src="/frontend/img/Imagenes/iconoCarrito.png" alt="" /></button>
+
+    <div class="menu_usuario">
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-label">
+        <img src="/frontend/img/Imagenes/iconoUsuario.png" alt="Menú" />
+      </label>
+      <div class="menu">
+        <a href="/frontend/pages/inicio.html">USUARIO</a>
+        <a href="/frontend/pages/gestion_comentarios.html">EMPLEADO</a>
+        <a href="/frontend/pages/usuarios.html">ADMINISTRADOR</a>
+        <a href="/frontend/pages/login.html">CERRAR SESIÓN</a>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="inicio.html">Inicio</a></li>
+      <p class="vl"></p>
+      <li><a href="index.html#Electrodomesticos">Electrodomésticos</a></li>
+      <p class="vl"></p>
+      <li><a href="index.html#Perifericos">Periféricos</a></li>
+      <p class="vl"></p>
+      <li><a href="index.html#Computadores">Computadores</a></li>
+      <p class="vl"></p>
+      <li><a href="index.html#Smartphones">Smartphones</a></li>
+      <p class="vl"></p>
+      <li><a href="#">Servicios</a></li>
+    </ul>
+  </nav>
+
+  <!-- 🛒 CARRITO FUNCIONAL -->
+  <main class="carrito">
+
+    <!-- 📥 FORMULARIO PARA AGREGAR PRODUCTOS AL CARRITO -->
+    <section>
+      <h2>Agregar producto al carrito</h2>
+      <form id="formAgregarCarrito">
+       <label>Producto:</label>
+    <select id="productoSelect"></select><br>
+
+    <label>Cantidad:</label>
+    <input type="number" id="cantidad" required><br>
+
+    <label>Precio unitario:</label>
+    <input type="number" id="precio" readonly><br>
+
+    <label>Unidades disponibles:</label>
+<input type="number" id="stock_disponible" readonly><br>
+
+        <button type="submit" id="btnAgregarProducto" title="Selecciona un producto">Agregar</button>
+        
+      </form>
+    </section>
+
+    <!-- 🧾 TABLA DEL CARRITO -->
+    <section>
+      <h2>Carrito</h2>
+      <table id="tablaCarrito">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- 💳 MÉTODO DE PAGO Y TOTALES -->
+    <section>
+      <h2>Método de pago</h2>
+      <select id="metodo_pago"></select>
+
+      <p><strong>Subtotal:</strong> <span id="subtotal">$0</span></p>
+      <p><strong>Total:</strong> <span id="total">$0</span></p>
+
+      <button id="btnPagar">Pagar</button>
+    </section>
+
+    <!-- 📄 RECIBO -->
+    <section id="reciboContainer"></section>
+
+  </main>
+
+  <!-- 📜 SCRIPTS -->
+  <script src="/frontend/js/carrito.js"></script>
+
+</body>
+</html>
+

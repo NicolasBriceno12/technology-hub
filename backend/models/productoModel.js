@@ -1,12 +1,12 @@
 import { pool } from '../config/db.js';
 
-// Obtener todos los productos
+// ✅ Obtener todos los productos
 export const getProductos = async () => {
-  const [rows] = await pool.query('SELECT * FROM productos');
+  const [rows] = await pool.query('SELECT id_producto, nombre_producto, precio_venta, stock FROM productos');
   return rows;
 };
 
-// Agregar un nuevo producto
+// ✅ Agregar un nuevo producto
 export const addProducto = async (producto) => {
   const {
     id_categoria,
@@ -34,7 +34,7 @@ export const addProducto = async (producto) => {
   return result;
 };
 
-// Actualizar un producto
+// ✅ Actualizar un producto
 export const updateProducto = async (id_producto, producto) => {
   const {
     id_categoria,
@@ -69,7 +69,7 @@ export const updateProducto = async (id_producto, producto) => {
   return result.affectedRows;
 };
 
-// Eliminar producto
+// ✅ Eliminar un producto
 export const deleteProducto = async (id_producto) => {
   const [result] = await pool.query('DELETE FROM productos WHERE id_producto = ?', [id_producto]);
   return result.affectedRows;

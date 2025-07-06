@@ -1,50 +1,149 @@
-const precios = {
-    cantidad1: 15,
-    cantidad2: 25
-  };
-  
-  function cambiarCantidad(id, cambio) {
-    const input = document.getElementById(id);
-    let valor = parseInt(input.value);
-    valor = isNaN(valor) ? 1 : valor + cambio;
-    if (valor < 1) valor = 1;
-    input.value = valor;
-    actualizarTotales();
+let carrito = []; // Productos seleccionados
+
+// ✅ Al cargar la página
+document.addEventListener('DOMContentLoaded', async () => {
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+  if (!usuario) {
+    alert("Debes iniciar sesión primero");
+    return window.location.href = "/frontend/pages/login.html";
   }
-  
-  function actualizarTotales() {
-    const cantidad1 = parseInt(document.getElementById('cantidad1').value);
-    const cantidad2 = parseInt(document.getElementById('cantidad2').value);
-    const subtotal = (cantidad1 * precios.cantidad1) + (cantidad2 * precios.cantidad2);
-    const envio = 5;
-    const impuestos = 0;
-    const total = subtotal + envio + impuestos;
-  
-    document.getElementById('subtotal').innerText = `$${subtotal}`;
-    document.getElementById('total').innerText = `$${total}`;
-  }
-  
-  // Inicializar al cargar
-  actualizarTotales();
 
-
-  document.addEventListener('DOMContentLoaded', async () => {
-  const res = await fetch('http://localhost:3000/api/productos');
-  const productos = await res.json();
-  productosGlobal = productos;
-  renderProductos(productos);
-
+  // ✅ Si el usuario está logueado, sí se ejecuta esto:
+  await cargarProductos();
+  mostrarCarrito();
+});
+  
   await cargarMetodosPago();
+  mostrarCarrito();
 
-  document.getElementById('btnPagar').addEventListener('click', pagar);
+  async function cargarProductos() {
+  try {
+    const res = await fetch('http://localhost:3000/api/productos');
+    const productos = await res.json();
+
+    const select = document.getElementById('productoSelect');
+    select.innerHTML = '<option value="">Seleccione un producto</option>';
+
+    productos.forEach(p => {
+      const option = document.createElement('option');
+      option.value = JSON.stringify(p); // Guarda el objeto completo
+      option.textContent = `${p.nombre_producto} - $${p.precio_venta}`;
+      select.appendChild(option);
+        const botonAgregar = document.getElementById('btnAgregarProducto');
+    if (seleccionado.stock > 0) {
+  botonAgregar.disabled = false;
+  botonAgregar.title = "Agregar al carrito";
+    } else {
+    botonAgregar.disabled = true;
+    botonAgregar.title = `Producto agotado: ${seleccionado.nombre_producto}`;
+  alert(`El producto "${seleccionado.nombre_producto}" no tiene stock disponible.`);
+  }
+    });
+
+    // Al seleccionar un producto, llenamos los campos ocultos
+    select.addEventListener('change', () => {
+  const seleccionado = JSON.parse(select.value);
+
+  document.getElementById('id_producto').value = seleccionado.id_producto;
+  document.getElementById('precio').value = seleccionado.precio_venta;
+  document.getElementById('stock_disponible').value = seleccionado.stock;
+
+  // 🔒 Validar si hay stock
+  const botonAgregar = document.getElementById('btnAgregarProducto');
+  if (seleccionado.stock > 0) {
+    botonAgregar.disabled = false;
+  } else {
+    botonAgregar.disabled = true;
+    alert(`El producto "${seleccionado.nombre_producto}" no tiene stock disponible.`);
+    
+    if (!select.value) {
+  document.getElementById('btnAgregarProducto').disabled = true;
+  return;
+}
+  }
 });
 
+  } catch (error) {
+    console.error('Error al cargar productos:', error);
+    alert('No se pudieron cargar los productos');
+  }
+}
+
+  // Escuchar evento de pagar
+  document.getElementById('btnPagar').addEventListener('click', pagar);
+
+  // Escuchar formulario de agregar producto
+document.getElementById('formAgregarCarrito').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const id_producto = parseInt(document.getElementById('id_producto').value);
+  const cantidad = parseInt(document.getElementById('cantidad').value);
+  const precio = parseFloat(document.getElementById('precio').value);
+  const stock = parseInt(document.getElementById('stock_disponible').value);
+
+  const nombre_producto = "Producto #" + id_producto;
+
+  if (cantidad > stock) {
+    return alert(`No puedes agregar más de ${stock} unidades disponibles`);
+  }
+
+  const existente = carrito.find(p => p.id_producto === id_producto);
+  if (existente) {
+    if ((existente.cantidad + cantidad) > stock) {
+      return alert(`Ya tienes ${existente.cantidad} unidades. Máximo disponible: ${stock}`);
+    }
+    existente.cantidad += cantidad;
+  } else {
+    carrito.push({ id_producto, nombre_producto, precio_venta: precio, cantidad });
+  }
+
+  mostrarCarrito();
+});
+
+// ✅ Mostrar productos del carrito
+function mostrarCarrito() {
+  const tbody = document.querySelector('#tablaCarrito tbody');
+  tbody.innerHTML = "";
+
+  let subtotal = 0;
+
+  carrito.forEach((item, index) => {
+    const fila = document.createElement('tr');
+    const totalProducto = item.precio_venta * item.cantidad;
+    subtotal += totalProducto;
+
+    fila.innerHTML = `
+      <td>${item.nombre_producto}</td>
+      <td>$${item.precio_venta}</td>
+      <td>${item.cantidad}</td>
+      <td>$${totalProducto}</td>
+      <td><button onclick="eliminarDelCarrito(${index})">❌</button></td>
+    `;
+    tbody.appendChild(fila);
+  });
+
+  const iva = Math.round(subtotal * 0.19);
+  const total = subtotal + iva;
+
+  document.getElementById('subtotal').innerText = `$${subtotal}`;
+  document.getElementById('total').innerText = `$${total}`;
+}
+
+// ✅ Eliminar producto del carrito
+function eliminarDelCarrito(index) {
+  carrito.splice(index, 1);
+  mostrarCarrito();
+}
+
+// ✅ Cargar métodos de pago desde el backend
 async function cargarMetodosPago() {
   const res = await fetch('http://localhost:3000/api/ventas/metodos-pago');
   const metodos = await res.json();
 
   const select = document.getElementById('metodo_pago');
-  select.innerHTML = '<option disabled selected value="">Seleccione un método</option>';
+  select.innerHTML = '<option value="">Seleccione un método</option>';
+
   metodos.forEach(m => {
     const option = document.createElement('option');
     option.value = m.id_metodo_pago;
@@ -53,51 +152,44 @@ async function cargarMetodosPago() {
   });
 }
 
+// ✅ Registrar venta (pago)
 async function pagar() {
-  const correo = localStorage.getItem('correo');
-  const metodo_pago = parseInt(document.getElementById('metodo_pago').value);
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const metodo = parseInt(document.getElementById('metodo_pago').value);
 
-  if (!correo || isNaN(metodo_pago)) {
-    return alert('Por favor selecciona un método de pago y asegúrate de estar logueado');
+  if (!metodo || carrito.length === 0) {
+    return alert("Selecciona un método de pago y agrega productos al carrito");
   }
 
-  const usuarioRes = await fetch('http://localhost:3000/api/usuarios');
-  const usuarios = await usuarioRes.json();
-  const usuario = usuarios.find(u => u.correo === correo);
-  if (!usuario) return alert('Usuario no encontrado');
-
-  const carritoRes = await fetch('http://localhost:3000/api/ventas/pagar', {
+  const res = await fetch('http://localhost:3000/api/ventas', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       id_usuario: usuario.id,
-      id_metodo_pago: metodo_pago
+      id_metodo_pago: metodo,
+      productos: carrito
     })
   });
 
-  const data = await carritoRes.json();
-  alert(data.mensaje + '\nTotal pagado: $' + data.total);
-
-  carrito = [];
-  renderCarrito();
+  const data = await res.json();
+  if (res.ok) {
+    alert(data.mensaje + " Total pagado: $" + data.total);
+    generarRecibo(usuario, carrito, data.total, metodo);
+    carrito = [];
+    mostrarCarrito();
+  } else {
+    alert("Error al procesar el pago: " + data.error);
+  }
 }
 
-export const registrarPago = async (id_carrito, id_metodo_pago, total) => {
-  const [result] = await pool.query(
-    'INSERT INTO pagos (id_carrito, id_metodo_pago, total) VALUES (?, ?, ?)',
-    [id_carrito, id_metodo_pago, total]
-  );
-  return result.insertId;
-};
-
-generarRecibo(usuario, carrito, data.total, metodo_pago);
+// ✅ Mostrar recibo en pantalla y descargar PDF
 function generarRecibo(usuario, carrito, total, id_metodo_pago) {
   const metodoTexto = {
     1: 'Nequi',
     2: 'Tarjeta de crédito',
     3: 'Efectivo',
     4: 'PSE'
-  }[id_metodo_pago] || 'Desconocido';
+  }[id_metodo_pago] || 'Otro';
 
   const fecha = new Date().toLocaleString();
 
@@ -118,8 +210,7 @@ function generarRecibo(usuario, carrito, total, id_metodo_pago) {
               <td>$${p.precio_venta}</td>
               <td>${p.cantidad}</td>
               <td>$${p.precio_venta * p.cantidad}</td>
-            </tr>`
-          ).join('')}
+            </tr>`).join('')}
         </tbody>
       </table>
       <h3>Total pagado: $${total}</h3>
@@ -127,9 +218,10 @@ function generarRecibo(usuario, carrito, total, id_metodo_pago) {
     </div>
   `;
 
-  document.body.insertAdjacentHTML('beforeend', reciboHTML);
+  document.getElementById('reciboContainer').innerHTML = reciboHTML;
 }
 
+// ✅ Descargar el recibo como PDF
 function descargarPDF() {
   const recibo = document.getElementById('recibo');
   const options = {
@@ -141,13 +233,3 @@ function descargarPDF() {
   };
   html2pdf().from(recibo).set(options).save();
 }
-
-const res = await fetch('http://localhost:3000/api/ventas', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    id_usuario: usuario.id,
-    id_metodo_pago: parseInt(document.getElementById('metodo_pago').value),
-    productos: carrito
-  })
-});

@@ -1,8 +1,10 @@
-import express from 'express';
-import { registrarVenta } from '../controllers/ventasController.js';
+import { Router } from 'express';
+import { listarMetodosPago, registrarVentaController } from '../controllers/ventasController.js';
 
-const router = express.Router();
+const router = Router();
 
-router.post('/', registrarVenta); // POST /api/ventas
+// Rutas
+router.get('/metodos-pago', listarMetodosPago);
+router.post('/', registrarVentaController);
 
 export default router;
