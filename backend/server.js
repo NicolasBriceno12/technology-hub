@@ -8,7 +8,7 @@ import pqrsRoutes from './routes/pqrsRoutes.js';
 import productoRoutes from './routes/productoRoutes.js';
 import rolesRoutes from './routes/rolesRoutes.js';
 import usuarioRoutes from './routes/usuarioRoutes.js';
-import ventaRoutes from './routes/ventaRoutes.js';
+import ventaRoutes from './routes/ventasRoutes.js';
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -32,3 +32,8 @@ res.sendFile(path.join(__dirname, '../frontend/login.html'));
 app.listen(3000, () => {
 console.log('Servidor corriendo en http://localhost:3000');
 });
+
+// import clienteRoutes from './routes/cliente.routes.js';
+// app.use('/api/clientes', clienteRoutes);
+// Servir frontend estático
+app.use(express.static(path.join(__dirname, '../frontend')));

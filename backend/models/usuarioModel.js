@@ -46,9 +46,3 @@ export const addUsuario = async (usuario) => {
   return result;
 };
 
-if (
-  !id_rol || !id_presupuesto || !nombre || 
-  !nombre_usuario || !contraseña || !correo || !telefono
-) {
-  return res.status(400).json({ error: 'Todos los campos son obligatorios' });
-}
