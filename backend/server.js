@@ -1,40 +1,25 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const path = require('path');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-// Middlewares
+// Middleware
 app.use(cors());
-app.use(bodyParser.json());
 app.use(express.json());
 
-// Servir archivos estáticos del frontend
-app.use('/frontend', express.static(path.join(__dirname, '../frontend')));
-app.use(express.static(path.join(__dirname, '../frontend')));
-
 // Rutas
-const authRoutes = require('./routes/authRoutes');
 app.use('/api', authRoutes);
 
-// Ruta principal - redirigir al login
+// Ruta raíz opcional
 app.get('/', (req, res) => {
-    res.redirect('/pages/login.html');
+  res.send('✅ Servidor backend de TechnologyHub funcionando. Usa /api/login o /api/register');
 });
 
-// Ruta de prueba de la API
-app.get('/api/test', (req, res) => {
-    res.json({ mensaje: 'API funcionando correctamente' });
-});
+// Puerto
+const PORT = process.env.PORT || 3000;
 
-// Manejo de errores
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Error interno del servidor' });
-});
-
-const PUERTO = 3000;
-app.listen(PUERTO, () => {
-    console.log(`🚀 Servidor corriendo en http://localhost:${PUERTO}`);
+// Iniciar servidor
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor ejecutando en http://localhost:${PORT}`);
 });

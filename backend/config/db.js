@@ -1,5 +1,4 @@
 const mysql = require('mysql2');
-
 const conexion = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -7,9 +6,12 @@ const conexion = mysql.createConnection({
   database: 'tecnologyhub'
 });
 
-conexion.connect((err) => {
-  if (err) throw err;
-  console.log('✅ Conectado a la BD MySQL');
+conexion.connect(err => {
+  if (err) {
+    console.error('Error al conectar MySQL:', err);
+    return;
+  }
+  console.log('✅ Conectado a MySQL');
 });
 
-module.exports = conexion;
+module.exports = conexion;

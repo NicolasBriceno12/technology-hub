@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -19,106 +20,60 @@
         <button type="submit" class="btnlogin ingresar">INGRESAR</button><br>
         <a href="registro.html"><button type="button" class="btnlogin registrar">REGISTRAR</button></a>
     </form>
-    
-    <!-- Mensaje de estado -->
     <div id="mensaje" style="margin-top: 15px; padding: 10px; border-radius: 5px; display: none;"></div>
-    
     <div class="iconslogin">
         <a href="#"><button><img src="../imagenes2/iconoGoogle.png"></button></a>
         <a href="#"><button><img src="../imagenes2/facebook.png"></button></a>
         <a href="#"><button><img src="../imagenes2/x.png"></button></a>
     </div>
    </div> 
-
    <script>
     function mostrarContrasena() {
         const campo = document.getElementById('contrasena');
         const icono = document.querySelector('.icono-ojo');
-        
-        if (campo.type === 'password') {
-            campo.type = 'text';
-            icono.style.opacity = '0.7';
-        } else {
-            campo.type = 'password';
-            icono.style.opacity = '1';
-        }
+        campo.type = campo.type === 'password' ? 'text' : 'password';
+        icono.style.opacity = campo.type === 'text' ? '0.7' : '1';
     }
-
     function mostrarMensaje(texto, tipo) {
         const mensaje = document.getElementById('mensaje');
         mensaje.textContent = texto;
         mensaje.style.display = 'block';
-        
-        if (tipo === 'exito') {
-            mensaje.style.backgroundColor = '#d4edda';
-            mensaje.style.color = '#155724';
-            mensaje.style.border = '1px solid #c3e6cb';
-        } else {
-            mensaje.style.backgroundColor = '#f8d7da';
-            mensaje.style.color = '#721c24';
-            mensaje.style.border = '1px solid #f5c6cb';
-        }
-        
-        // Ocultar mensaje después de 5 segundos
-        setTimeout(() => {
-            mensaje.style.display = 'none';
-        }, 5000);
+        mensaje.style.backgroundColor = tipo === 'exito' ? '#d4edda' : '#f8d7da';
+        mensaje.style.color = tipo === 'exito' ? '#155724' : '#721c24';
+        mensaje.style.border = tipo === 'exito' ? '1px solid #c3e6cb' : '1px solid #f5c6cb';
+        setTimeout(() => mensaje.style.display = 'none', 5000);
     }
-
     document.getElementById('formLogin').addEventListener('submit', async function(e) {
         e.preventDefault();
-
         const correo = document.getElementById('correo').value.trim();
         const contrasena = document.getElementById('contrasena').value;
-
-        // Validaciones básicas
-        if (!correo || !contrasena) {
-            mostrarMensaje('Por favor complete todos los campos', 'error');
+        if (!correo || !contrasena || !correo.includes('@')) {
+            mostrarMensaje('Campos incompletos o correo inválido', 'error');
             return;
         }
-
-        if (!correo.includes('@')) {
-            mostrarMensaje('Por favor ingrese un correo válido', 'error');
-            return;
-        }
-
-        // Deshabilitar botón mientras se procesa
-        const btnSubmit = document.querySelector('button[type="submit"]');
-        const textoOriginal = btnSubmit.textContent;
-        btnSubmit.disabled = true;
-        btnSubmit.textContent = 'INGRESANDO...';
-
+        const btn = document.querySelector('button[type="submit"]');
+        const original = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'INGRESANDO...';
         try {
             const res = await fetch('http://localhost:3000/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ correo, contrasena })
             });
-
             const data = await res.json();
-
             if (res.ok) {
                 mostrarMensaje(data.mensaje, 'exito');
-                
-                // Guardar datos del usuario en localStorage (opcional)
-                if (data.usuario) {
-                    localStorage.setItem('usuario', JSON.stringify(data.usuario));
-                }
-                
-                // Redirigir después de 2 segundos
-                setTimeout(() => {
-                    window.location.href = "inicio.html";
-                }, 2000);
+                localStorage.setItem('usuario', JSON.stringify(data.usuario));
+                setTimeout(() => window.location.href = "inicio.html", 2000);
             } else {
                 mostrarMensaje(data.error || 'Error en el login', 'error');
             }
         } catch (error) {
-            console.error('Error:', error);
-            mostrarMensaje('Error de conexión. Verifique que el servidor esté funcionando.', 'error');
+            mostrarMensaje('Error de conexión.', 'error');
         } finally {
-            // Rehabilitar botón
-            btnSubmit.disabled = false;
-            btnSubmit.textContent = textoOriginal;
+            btn.disabled = false;
+            btn.textContent = original;
         }
     });
    </script>
