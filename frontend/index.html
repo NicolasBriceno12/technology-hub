@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/frontend/css/estilos.css" />
+    <link rel="stylesheet" href="/css/estilos.css" />
     <title>TechnologyHub</title>
   </head>
   <body>
@@ -31,12 +31,16 @@
           <img src="Imagenes/iconoUsuario.png" alt="Menú" />
         </label>
         <div class="menu">
-          <a href="inicio.html">USUARIO</a>
-          <a href="gestion_comentarios.html">EMPLEADO</a>
-          <a href="usuarios.html">ADMINISTRADOR</a>
-          <a href="/frontend/pages/login.html">CERRAR SESION</a>
+          <a href="/pages/inicio.html">USUARIO</a>
+          <a href="/pages/gestion_comentarios.html">EMPLEADO</a>
+          <a href="/pages/usuarios.html">ADMINISTRADOR</a>
+          <a href="/pages/login.html" id="logout">CERRAR SESION</a>
+          <script>document.getElementById('logout').addEventListener('click', () => {
+                    window.location.replace('/pages/login.html'); // Redirige al archivo que borra la sesión
+                    });
+          </script>
         </div>
-      </div>
+      </div> 
     </header>
 
     <!--  MENU DESPLEGABLE NAVEGADOR -->

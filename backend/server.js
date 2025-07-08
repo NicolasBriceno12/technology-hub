@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const path = require('path');
 
 // Middleware
 app.use(cors());
@@ -56,16 +57,18 @@ try {
 }
 
 try {
-  const ventasRoutes = require('./routes/ventasRoutes');
-  app.use('/api/ventas', ventasRoutes);
-  console.log('✅ ventasRoutes cargado');
+  const gestionVentasRoutes = require('./routes/gestionVentasRoutes');
+  app.use('/api/gestion_ventas', gestionVentasRoutes);
+  console.log('✅ gestionVentasRoutes cargado');
 } catch (err) {
-  console.error('❌ Error cargando ventasRoutes:', err.message);
+  console.error('❌ Error cargando gestionVentasRoutes:', err.message);
 }
+
+app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Ruta raíz
 app.get('/', (req, res) => {
-  res.send('✅ Backend de TechnologyHub corriendo. Endpoints disponibles en /api/*');
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 // Puerto

@@ -115,6 +115,7 @@ async function cargarUsuarios() {
   usuarios.forEach((usuario) => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
+      <td>${usuario.id_usuarios}</td>
       <td>${usuario.nombre_usuario}</td>
       <td>${usuario.numero_documento}</td>
       <td>${usuario.rol}</td>
