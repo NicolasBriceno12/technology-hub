@@ -28,42 +28,20 @@ async function cargarProductos() {
       </td>
     `;
 
-    // Asignar eventos a los botones con p.id directamente
     const btnEliminar = fila.querySelector('.btn-eliminar');
     btnEliminar.addEventListener('click', () => {
-      eliminarProducto(p.id_producto); // 👈 aquí p.id se pasa correctamente
+      eliminarProducto(p.id); 
     });
 
     const btnEditar = fila.querySelector('.btn-editar');
     btnEditar.addEventListener('click', () => {
-      llenarFormulario(p); // también p contiene el objeto completo
+      llenarFormulario(p);
     });
 
     tabla.appendChild(fila);
   });
 }
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const data = Object.fromEntries(new FormData(form).entries());
-  data.precio = parseFloat(data.precio);
-  data.stock = parseInt(data.stock);
-  data.id_categoria = parseInt(data.id_categoria);
-
-  const url = data.id ? `/api/productos/${data.id}` : '/api/productos';
-  const method = data.id ? 'PUT' : 'POST';
-
-  await fetch(url, {
-    method,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-
-  form.reset();
-  document.getElementById('preview-img').style.display = 'none';
-  delete data.id;
-  cargarProductos();
-});
 
 async function eliminarProducto(id) {
   if (!id) {
@@ -84,17 +62,22 @@ async function eliminarProducto(id) {
   }
 }
 
-function llenarFormulario(p) {
-  form.nombre.value = p.nombre;
-  form.descripcion.value = p.descripcion;
-  form.precio.value = p.precio;
-  form.imagen.value = p.imagen;
-  form.stock.value = p.stock;
-  form.id_categoria.value = p.id_categoria;
-  form.id = p.id;
+async function llenarFormulario(p) {
+  document.getElementById('id_producto').value = p.id;
+  document.getElementById('nombre').value = p.nombre;
+  document.getElementById('descripcion').value = p.descripcion;
+  document.getElementById('precio').value = p.precio;
+  document.getElementById('imagen').value = p.imagen;
+  document.getElementById('stock').value = p.stock;
 
-  document.getElementById('preview-img').src = p.imagen;
-  document.getElementById('preview-img').style.display = 'block';
+  // Esperamos a que se carguen las categorías
+  await cargarCategorias();
+
+  // Una vez cargado el select, asignamos la categoría
+  const selectCategoria = document.getElementById('select-categorias');
+  if (selectCategoria) {
+    selectCategoria.value = p.id_categoria || '';
+  }
 }
 
 async function cargarCategorias() {
@@ -119,6 +102,95 @@ document.getElementById('imagen').addEventListener('input', function () {
     preview.style.display = 'block';
   } else {
     preview.style.display = 'none';
+  }
+});
+
+document.getElementById('btn-agregar').addEventListener('click', async () => {
+  const form = document.getElementById('form-producto'); // Asegúrate que tu form tenga este id
+  const data = Object.fromEntries(new FormData(form).entries());
+
+  // Validaciones básicas
+  if (!data.nombre || !data.precio || isNaN(parseFloat(data.precio))) {
+    alert('⚠️ Por favor completa correctamente el nombre y el precio.');
+    return;
+  }
+
+  // Conversión de datos
+  data.precio = parseFloat(data.precio);
+  data.stock = parseInt(data.stock) || 0;
+  data.id_categoria = parseInt(data.id_categoria);
+
+  try {
+    const res = await fetch('/api/productos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (res.ok) {
+      alert('✅ Producto agregado correctamente');
+      form.reset();
+      document.getElementById('preview-img').style.display = 'none';
+      cargarProductos(); // Vuelve a cargar la tabla
+    } else {
+      const err = await res.json();
+      console.error(err);
+      alert('❌ Error al agregar el producto');
+    }
+  } catch (error) {
+    console.error(error);
+    alert('❌ Error de conexión al servidor');
+  }
+});
+
+document.getElementById('btn-modificar').addEventListener('click', async () => {
+  const id = document.getElementById('id_producto').value;
+
+  if (!id) {
+    alert('⚠️ Primero selecciona un producto desde la tabla con el ícono ✏️');
+    return;
+  }
+
+  const nombre = document.getElementById('nombre').value.trim();
+  const descripcion = document.getElementById('descripcion').value.trim();
+  const precio = parseFloat(document.getElementById('precio').value);
+  const imagen = document.getElementById('imagen').value.trim();
+  const stock = parseInt(document.getElementById('stock').value);
+  const id_categoria = parseInt(document.getElementById('select-categorias').value);
+
+  if (!nombre || isNaN(precio)) {
+    alert('⚠️ Verifica que el nombre y el precio sean válidos');
+    return;
+  }
+
+  const productoModificado = {
+    nombre,
+    descripcion,
+    precio,
+    imagen,
+    stock,
+    id_categoria
+  };
+
+  try {
+    const res = await fetch(`/api/productos/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(productoModificado)
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert('✅ Producto modificado correctamente');
+      cargarProductos(); // Vuelve a cargar la tabla
+    } else {
+      console.error(data);
+      alert('❌ Error al modificar producto');
+    }
+  } catch (error) {
+    console.error(error);
+    alert('❌ Error de conexión al servidor');
   }
 });
 

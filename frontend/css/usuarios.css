@@ -188,107 +188,104 @@ input[type="checkbox"]:checked ~ .menu {
     scroll-margin-top: 280px;
   }
   
-  /* BODY */
+  /* Estructura de columnas principales */
+main.columnas {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px;
+  gap: 40px;
+  background-color: #f4f4f4;
+  min-height: calc(100vh - 170px); /* Ajusta según el alto del header/nav */
+}
 
-  .columnas{
-    display: flex;
-    
-  }
+/* FORMULARIO IZQUIERDA */
+.formulario-usuario {
+  background-color: white;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
 
-  .izquierda{
-    width: 60%;
-    display: flex;
-    justify-content: left;
-    flex-direction: column;
-    align-items: center;
-  }
+.formulario-usuario h3 {
+  margin-bottom: 20px;
+  color: #4a154b;
+  text-align: center;
+}
 
-  .izquierda_arriba{
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    gap: 20px;
-    margin: 20px;
-    margin-top: 40px;
-  }
+.formulario-usuario input {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  outline: none;
+  transition: border 0.3s ease;
+}
 
-  .izquierda img{
-    height: 60px;
-  }
+.formulario-usuario input:focus {
+  border-color: #9e57c8;
+}
 
-  .izquierda input{
-    height: 60px;
-    width: 1000px;
-    font-size: 20px;
-    font-weight: 100;
-    padding-left: 20px;
-    border-radius: 10px;
-  }
+.botones-crud {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
 
-  .derecha{
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-gap: 70px;
-  }
+.boton {
+  padding: 12px;
+  border: none;
+  background-color: #9e57c8;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  .boton{
-    height: 60px;
-    width: 400px;
-    background-color: #c2a9e4;
-    cursor: pointer;
-    border-radius: 20px;
-    box-shadow: #000;
-    
-  }
+.boton:hover {
+  background-color: #7d4096;
+}
 
-  .boton span{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 20px;
-  }
+/* TABLA DERECHA */
+.tabla-container {
+  background-color: white;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  width: 55%;
+  overflow-x: auto;
+}
 
-  .boton:hover{
-    transform: scale(1.02,1.02);
-  }
+.tabla-container h3 {
+  margin-bottom: 20px;
+  color: #4a154b;
+  text-align: center;
+}
 
-  .boton:active{
-    transform: scale(0.9,0.9);
-  }
+.tabla-excel {
+  width: 100%;
+  border-collapse: collapse;
+}
 
+.tabla-excel th,
+.tabla-excel td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+}
 
-  /* TABLA */
+.tabla-excel th {
+  background-color: #d8c1e9;
+  color: #1f003b;
+}
 
-  .tabla-excel {
-    width: 90%;
-    height: 60%;
-    margin: 30px auto;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  
-  .tabla-excel th, .tabla-excel td {
-    border: 1px solid #000000;
-    padding: 12px;
-    text-align: center;
-  }
-  
-  .tabla-excel thead {
-    background-color: #b487f0;
-  }
-  
-  .tabla-excel tbody tr:nth-child(even) {
-    background-color: #9eb9c9; /* filas alternadas */
-  }
-
-  .tabla-excel tbody{
-    background-color: #ffffff;
-    height: 50px;
-  }
-
-  td img{
-    height: 40px;
-    padding: 0;
-  }
+.tabla-excel tbody tr:hover {
+  background-color: #f3e9fb;
+}

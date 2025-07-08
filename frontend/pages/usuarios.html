@@ -1,92 +1,119 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/frontend/css/usuarios.css" />
-  <title>TechnologyHub - Gestión de Usuarios</title>
-</head>
-<body>
-  <!-- ENCABEZADO -->
-  <header>
-    <img class="logo" src="imagenes3/Logo.png" alt="Logo" />
-    <h1>MENÚ DE ADMINISTRADORES</h1>
-    <div class="iconoUsuario">
-      <div class="menu_usuario">
-        <input type="checkbox" id="menu-toggle" />
-        <label for="menu-toggle" class="menu-label">
-          <img src="Imagenes/iconoUsuario.png" alt="Menú" />
-        </label>
-        <div class="menu">
-          <a href="inicio.html">USUARIO</a>
-          <a href="gestion_comentarios.html">EMPLEADO</a>
-          <a href="usuarios.html">ADMINISTRADOR</a>
-          <a href="login.html">CERRAR SESIÓN</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/usuarios.css" />
+    <title>TechnologyHub - Gestión de Usuarios</title>
+  </head>
+  <body>
+    <!-- ENCABEZADO -->
+    <header>
+      <img class="logo" src="../img/Imagenes/Logo.png" alt="Logo" />
+      <h1>MENÚ DE ADMINISTRADORES</h1>
+      <div class="iconoUsuario">
+        <div class="menu_usuario">
+          <input type="checkbox" id="menu-toggle" />
+          <label for="menu-toggle" class="menu-label">
+            <img src="../img/Imagenes/iconoUsuario.png" alt="Menú" />
+          </label>
+          <div class="menu">
+            <a href="inicio.html">USUARIO</a>
+            <a href="gestion_comentarios.html">EMPLEADO</a>
+            <a href="usuarios.html">ADMINISTRADOR</a>
+            <a href="login.html">CERRAR SESIÓN</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- NAVEGACIÓN -->
+    <nav>
+      <ul>
+        <li><a href="gestion_comentarios.html">GESTIÓN DE COMENTARIOS</a></li>
+        <p class="vl"></p>
+        <li><a href="gestion_inventario.html">GESTIÓN DE INVENTARIO</a></li>
+        <p class="vl"></p>
+        <li><a href="gestion_ventas.html">GESTIÓN DE VENTAS</a></li>
+        <p class="vl"></p>
+        <li><a href="usuarios.html">GESTIÓN DE USUARIOS</a></li>
+      </ul>
+    </nav>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="columnas">
+      <!-- FORMULARIO USUARIO -->
+      <section class="formulario-usuario izquierda">
+        <h3>Formulario de Usuario</h3>
+
+        <input
+          type="text"
+          id="id_usuarios"
+          placeholder="ID (solo para editar o eliminar)"
+        />
+        <div class="grupo-doble">
+          <input type="text" id="nombres" placeholder="Nombres" />
+          <input type="text" id="apellidos" placeholder="Apellidos" />
+        </div>
+        <input
+          type="text"
+          id="nombre_usuario"
+          placeholder="Nombre de Usuario"
+        />
+        <input type="password" id="contrasena" placeholder="Contraseña" />
+        <input type="email" id="correo" placeholder="Correo electrónico" />
+        <input
+          type="text"
+          id="tipo_documento"
+          placeholder="Tipo de Documento (CC, TI...)"
+        />
+        <input
+          type="number"
+          id="numero_documento"
+          placeholder="Número de Documento"
+        />
+        <div class="grupo-cuadruple">
+          <input type="text" id="direccion" placeholder="Dirección" />
+          <input type="text" id="ciudad" placeholder="Ciudad" />
+          <input
+            type="date"
+            id="fecha_nacimiento"
+            placeholder="Fecha de Nacimiento"
+          />
+          <input type="tel" id="telefono" placeholder="Teléfono" />
         </div>
 
-      </div>
-    </div>
-  </header>
+        <input
+          type="number"
+          id="id_rol"
+          placeholder="Rol (1=Usuario, 2=Admin, 3=Empleado)"
+        />
 
-  <!-- NAVEGACIÓN -->
-  <nav>
-    <ul>
-      <li><a href="gestion_comentarios.html">GESTIÓN DE COMENTARIOS</a></li>
-      <p class="vl"></p>
-      <li><a href="gestion_inventario.html">GESTIÓN DE INVENTARIO</a></li>
-      <p class="vl"></p>
-      <li><a href="gestion_ventas.html">GESTIÓN DE VENTAS</a></li>
-      <p class="vl"></p>
-      <li><a href="/frontend/pages/usuarios.html">GESTIÓN DE USUARIOS</a></li>
-    </ul>
-  </nav>
+        <div class="botones-crud">
+          <button id="btn-agregar" class="boton">AGREGAR USUARIO</button>
+          <button id="btn-modificar" class="boton">MODIFICAR USUARIO</button>
+          <button id="btn-eliminar" class="boton">ELIMINAR USUARIO</button>
+        </div>
+      </section>
 
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="columnas">
-    <!-- FORMULARIO USUARIO -->
-    <section class="formulario-usuario izquierda">
-      <h3>Formulario de Usuario</h3>
+      <!-- TABLA DE USUARIOS -->
+      <section class="tabla-container derecha">
+        <h3>Lista de Usuarios</h3>
+        <table class="tabla-excel" id="tabla-usuarios">
+          <thead>
+            <tr>
+              <th>Nombre usuario</th>
+              <th># de identidad</th>
+              <th>Rol</th>
+              <th>ID Rol</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    </main>
 
-      <input type="text" id="id_usuarios" placeholder="ID (solo para editar o eliminar)" />
-      <input type="text" id="nombres" placeholder="Nombres" />
-      <input type="text" id="apellidos" placeholder="Apellidos" />
-      <input type="text" id="nombre_usuario" placeholder="Nombre de Usuario" />
-      <input type="password" id="contrasena" placeholder="Contraseña" />
-      <input type="email" id="correo" placeholder="Correo electrónico" />
-      <input type="text" id="tipo_documento" placeholder="Tipo de Documento (CC, TI...)" />
-      <input type="number" id="numero_documento" placeholder="Número de Documento" />
-      <input type="date" id="fecha_nacimiento" placeholder="Fecha de Nacimiento" />
-      <input type="text" id="ciudad" placeholder="Ciudad" />
-      <input type="text" id="direccion" placeholder="Dirección" />
-      <input type="tel" id="telefono" placeholder="Teléfono" />
-      <input type="number" id="id_rol" placeholder="Rol (1=Usuario, 2=Admin, 3=Empleado)" />
-
-      <div class="botones-crud">
-        <button id="btn-agregar" class="boton">AGREGAR USUARIO</button>
-        <button id="btn-modificar" class="boton">MODIFICAR USUARIO</button>
-        <button id="btn-eliminar" class="boton">ELIMINAR USUARIO</button>
-
-      </div>
-    </section>
-
-    <!-- TABLA DE USUARIOS -->
-    <section class="tabla-container derecha">
-      <h3>Lista de Usuarios</h3>
-      <table class="tabla-excel" id="tabla-usuarios">
-        <thead>
-          <tr>
-            <th>Nombre usuario</th>
-            <th># de identidad</th>
-            <th>Rol</th>
-            <th>ID Rol</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-  </main>
-
-  <!-- ENLACE AL JS -->
-  <script src="/frontend/js/usuarios.js"></script>
-</body>
+    <!-- ENLACE AL JS -->
+    <script src="../js/usuarios.js"></script>
+  </body>
 </html>
