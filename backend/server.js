@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 // Rutas
 const authRoutes = require('./routes/authRoutes');
 app.use('/api', authRoutes);
+app.use('/api/productos', require('./routes/productoRoutes'));
 
 // Ruta principal - redirigir al login
 app.get('/', (req, res) => {
@@ -36,5 +37,5 @@ app.use((err, req, res, next) => {
 
 const PUERTO = 3000;
 app.listen(PUERTO, () => {
-    console.log(`🚀 Servidor corriendo en http://localhost:${PUERTO}`);
+    console.log(`Servidor corriendo en http://localhost:${PUERTO}`);
 });

@@ -281,3 +281,177 @@ nav ul li:hover {
 .btn:hover {
     background-color: #d3bce8;
 }  
+
+.container {
+    background-color: #ffffff;
+    border: 5px solid #9e8ca4;
+    border-radius: 40px;
+    padding: 30px;
+    margin: 40px auto;
+    width: 1100px;
+    box-shadow: 0 0 20px #9b8ab0;
+}
+
+.container h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #1f003b;
+}
+
+/* FORMULARIO */
+#form-producto {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+#form-producto input {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 2px solid #aaa;
+    font-size: 16px;
+    width: 100%;
+}
+
+#form-producto button {
+    padding: 12px;
+    background-color: #b69bcf;
+    border: 2px solid #2e003d;
+    color: #1f003b;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 3px 3px 5px #333;
+}
+
+#form-producto button:hover {
+    background-color: #d3bce8;
+}
+
+/* TABLA DE PRODUCTOS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+thead {
+    background-color: #8e65a5;
+    color: white;
+    font-size: 18px;
+}
+
+th, td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+td input {
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 90%;
+    font-size: 15px;
+}
+
+td img {
+    max-width: 80px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+
+/* BOTONES DE ACCIONES */
+button.edit, button.delete {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 2px;
+}
+
+button.edit {
+    background-color: #ffc107;
+    color: #333;
+}
+
+button.edit:hover {
+    background-color: #ffdd57;
+}
+
+button.delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+button.delete:hover {
+    background-color: #ff5f72;
+}
+
+.formulario {
+  width: 90%;
+  margin: 30px auto;
+  background: #f0f0f0;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 15px #ccc;
+}
+
+.formulario form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formulario input,
+.formulario select,
+.formulario button {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.formulario button {
+  background-color: #9c7dbb;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.formulario button:hover {
+  background-color: #b08dd3;
+}
+
+.tabla {
+  width: 95%;
+  margin: 30px auto;
+  overflow-x: auto;
+}
+
+.tabla table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px #999;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tabla th, .tabla td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabla th {
+  background-color: #9c7dbb;
+  color: white;
+}
