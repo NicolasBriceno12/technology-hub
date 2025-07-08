@@ -3,62 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="/css/carrito.css">
+  <link rel="stylesheet" href="/frontend/css/carrito.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <title>TechnologyHub - Carrito</title>
 </head>
 <body>
 
-  <!-- 🔙 BOTÓN VOLVER -->
+  <!-- 🔙 Botón volver -->
   <button class="btn-volver" onclick="window.history.back()" style="margin: 10px;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
-    fill="currentColor" viewBox="0 0 16 16">
-      <path d="M15 8a.5.5 0 0 1-.5.5H2.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 1 1 .708.708L2.707 7.5H14.5a.5.5 0 0 1 .5.5z"/>
-    </svg>
     Volver atrás
   </button>
 
-  <!-- 🧭 ENCABEZADO Y MENÚ -->
+  <!-- 🧭 Menú y encabezado -->
   <header>
-    <img src="/frontend/img/imagenes/Logo.png" class="logo" />
-    <div class="lupa">
-      <button><img src="/frontend/img/imagenes/iconoLupa.png" alt="" /></button>
-    </div>
+    <img src="/img/imagenes/Logo.png" class="logo" />
     <input type="text" class="cajaTexto" placeholder="¿Qué producto te gustaría buscar?" />
-    <button><img src="/frontend/img/Imagenes/iconoCarrito.png" alt="" /></button>
-
-    <div class="menu_usuario">
-      <input type="checkbox" id="menu-toggle" />
-      <label for="menu-toggle" class="menu-label">
-        <img src="/frontend/img/Imagenes/iconoUsuario.png" alt="Menú" />
-      </label>
-      <div class="menu">
-        <a href="/frontend/pages/inicio.html">USUARIO</a>
-        <a href="/frontend/pages/gestion_comentarios.html">EMPLEADO</a>
-        <a href="/frontend/pages/usuarios.html">ADMINISTRADOR</a>
-        <a href="/frontend/pages/login.html">CERRAR SESIÓN</a>
-      </div>
-    </div>
+    <button><img src="/img/imagenes/iconoCarrito.png" alt="" /></button>
   </header>
 
-  <nav>
+    <nav>
     <ul>
       <li><a href="inicio.html">Inicio</a></li>
-      <p class="vl"></p>
-      <li><a href="index.html#Electrodomesticos">Electrodomésticos</a></li>
-      <p class="vl"></p>
-      <li><a href="index.html#Perifericos">Periféricos</a></li>
-      <p class="vl"></p>
-      <li><a href="index.html#Computadores">Computadores</a></li>
-      <p class="vl"></p>
-      <li><a href="index.html#Smartphones">Smartphones</a></li>
-      <p class="vl"></p>
-      <li><a href="#">Servicios</a></li>
+      <li><a href="inicio.html#Electrodomesticos">Electrodomésticos</a></li>
+      <li><a href="inicio.html#Perifericos">Periféricos</a></li>
+      <li><a href="inicio.html#Computadores">Computadores</a></li>
+      <li><a href="inicio.html#Smartphones">Smartphones</a></li>
+      <li><a href="inicio.html#Servicios">Servicios</a></li>
     </ul>
   </nav>
 
   <!-- 🛒 CARRITO FUNCIONAL -->
   <main class="carrito">
+
+    <!-- 📦 PRODUCTOS -->
+    <section>
+      <h2>Productos disponibles</h2>
+      <div id="productos-container" class="productos-container"></div>
+    </section>
 
     <!-- 🧾 TABLA DEL CARRITO -->
     <section>
@@ -92,22 +73,15 @@
       <p><strong>Subtotal:</strong> <span id="subtotal">$0</span></p>
       <p><strong>Total:</strong> <span id="total">$0</span></p>
 
-      <div style="margin-top: 10px;">
-        <label for="correo">Correo para recibo:</label>
-        <input type="email" id="correo" placeholder="correo@ejemplo.com">
-      </div>
+      <label for="correo">Correo para recibo:</label>
+      <input type="email" id="correo" placeholder="correo@ejemplo.com" />
 
-      <button id="btnPagar">Pagar</button>
       <button id="finalizar-compra">Finalizar Compra</button>
     </section>
 
-    <!-- 📄 RECIBO -->
     <section id="reciboContainer"></section>
-
   </main>
 
-  <!-- 📜 SCRIPTS -->
   <script src="/frontend/js/carrito.js"></script>
-
 </body>
 </html>
