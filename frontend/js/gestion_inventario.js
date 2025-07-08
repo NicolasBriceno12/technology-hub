@@ -67,7 +67,13 @@ async function llenarFormulario(p) {
   document.getElementById('nombre').value = p.nombre;
   document.getElementById('descripcion').value = p.descripcion;
   document.getElementById('precio').value = p.precio;
-  document.getElementById('imagen').value = p.imagen;
+  const preview = document.getElementById('preview-img');
+if (p.imagen) {
+  preview.src = p.imagen;
+  preview.style.display = 'block';
+} else {
+  preview.style.display = 'none';
+}
   document.getElementById('stock').value = p.stock;
 
   // Esperamos a que se carguen las categorías
@@ -94,44 +100,46 @@ async function cargarCategorias() {
   });
 }
 
-document.getElementById('imagen').addEventListener('input', function () {
-  const url = this.value.trim();
+document.getElementById('imagen').addEventListener('change', function (event) {
+  const file = event.target.files[0];
   const preview = document.getElementById('preview-img');
-  if (url) {
-    preview.src = url;
-    preview.style.display = 'block';
+
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
   } else {
+    preview.src = '';
     preview.style.display = 'none';
   }
 });
 
 document.getElementById('btn-agregar').addEventListener('click', async () => {
-  const form = document.getElementById('form-producto'); // Asegúrate que tu form tenga este id
-  const data = Object.fromEntries(new FormData(form).entries());
+  const form = document.getElementById('form-producto');
+  const formData = new FormData(form); // Recoge todos los campos incluyendo el archivo
 
-  // Validaciones básicas
-  if (!data.nombre || !data.precio || isNaN(parseFloat(data.precio))) {
+  // Validación básica
+  const nombre = formData.get('nombre');
+  const precio = parseFloat(formData.get('precio'));
+  if (!nombre || isNaN(precio)) {
     alert('⚠️ Por favor completa correctamente el nombre y el precio.');
     return;
   }
 
-  // Conversión de datos
-  data.precio = parseFloat(data.precio);
-  data.stock = parseInt(data.stock) || 0;
-  data.id_categoria = parseInt(data.id_categoria);
-
   try {
     const res = await fetch('/api/productos', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: formData // Aquí va FormData, sin headers
     });
 
     if (res.ok) {
       alert('✅ Producto agregado correctamente');
       form.reset();
       document.getElementById('preview-img').style.display = 'none';
-      cargarProductos(); // Vuelve a cargar la tabla
+      cargarProductos();
     } else {
       const err = await res.json();
       console.error(err);
@@ -154,7 +162,6 @@ document.getElementById('btn-modificar').addEventListener('click', async () => {
   const nombre = document.getElementById('nombre').value.trim();
   const descripcion = document.getElementById('descripcion').value.trim();
   const precio = parseFloat(document.getElementById('precio').value);
-  const imagen = document.getElementById('imagen').value.trim();
   const stock = parseInt(document.getElementById('stock').value);
   const id_categoria = parseInt(document.getElementById('select-categorias').value);
 
@@ -167,7 +174,6 @@ document.getElementById('btn-modificar').addEventListener('click', async () => {
     nombre,
     descripcion,
     precio,
-    imagen,
     stock,
     id_categoria
   };

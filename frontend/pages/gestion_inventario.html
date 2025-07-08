@@ -47,15 +47,19 @@
 </nav>
 <main>
 <div class="formulario">
-  <form id="form-producto">
-    <input type="hidden" id="id_producto" />
-    <input type="text" id= "nombre" name="nombre" placeholder="Nombre del producto" required />
-    <input type="text" id= "descripcion" name="descripcion" placeholder="Descripción" required />
-    <input type="number" id= "precio" name="precio" placeholder="Precio" step="0.01" required />
-    <input type="text" id= "imagen" name="imagen" placeholder="Ruta de imagen (URL)" required />
-    <img id="preview-img" src="" alt="Vista previa" style="max-height: 100px; display:none; margin:10px auto;" />
-    <input type="number" id= "stock" name="stock" placeholder="Stock inicial" required />
+  <form id="form-producto" enctype="multipart/form-data">
+    <input type="hidden" id="id_producto" name="id" />
     
+    <input type="text" id="nombre" name="nombre" placeholder="Nombre del producto" required />
+    <input type="text" id="descripcion" name="descripcion" placeholder="Descripción" required />
+    <input type="number" id="precio" name="precio" placeholder="Precio" step="0.01" required />
+    
+    <!-- Campo de imagen (type=file) -->
+    <input type="file" id="imagen" name="imagen" accept="image/*" required />
+    <img id="preview-img" src="" alt="Vista previa" style="max-height: 100px; display: none; margin: 10px auto;" />
+
+    <input type="number" id="stock" name="stock" placeholder="Stock inicial" required />
+
     <select name="id_categoria" id="select-categorias" required>
       <option value="">Selecciona una categoría</option>
     </select>

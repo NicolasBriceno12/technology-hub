@@ -1,4 +1,6 @@
 const db = require('../config/db');
+const multer = require('multer');
+const path = require('path');
 
 // Obtener todos los productos con su categoría
 exports.getAllProductos = async (req, res) => {
@@ -26,14 +28,27 @@ exports.getAllProductos = async (req, res) => {
 
 // Crear producto
 exports.createProducto = async (req, res) => {
-  const { nombre, descripcion, precio, imagen, stock, id_categoria } = req.body;
-  const sql = `
-    INSERT INTO productos (nombre, descripcion, precio, imagen, stock, id_categoria)
-    VALUES (?, ?, ?, ?, ?, ?)
-  `;
   try {
-    const [result] = await db.query(sql, [nombre, descripcion, precio, imagen, stock || 0, id_categoria]);
-    res.status(201).json({ id: result.insertId });
+    const { nombre, descripcion, precio, stock, id_categoria } = req.body;
+
+    // Obtener el nombre del archivo subido con multer
+    const imagen = req.file ? `/img/uploads/${req.file.filename}` : null;
+
+    const sql = `
+      INSERT INTO productos (nombre, descripcion, precio, imagen, stock, id_categoria)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `;
+
+    const [result] = await db.query(sql, [
+      nombre,
+      descripcion,
+      parseFloat(precio),
+      imagen,
+      parseInt(stock) || 0,
+      parseInt(id_categoria)
+    ]);
+
+    res.status(201).json({ id: result.insertId, mensaje: 'Producto creado exitosamente' });
   } catch (err) {
     console.error('❌ Error al crear producto:', err.message);
     res.status(500).json({ error: err });
@@ -43,14 +58,14 @@ exports.createProducto = async (req, res) => {
 // Editar producto
 exports.updateProducto = async (req, res) => {
   const { id } = req.params;
-  const { nombre, descripcion, precio, imagen, stock, id_categoria } = req.body;
+  const { nombre, descripcion, precio, stock, id_categoria } = req.body;
   const sql = `
     UPDATE productos 
-    SET nombre=?, descripcion=?, precio=?, imagen=?, stock=?, id_categoria=?
+    SET nombre=?, descripcion=?, precio=?, stock=?, id_categoria=?
     WHERE id_producto=?
   `;
   try {
-    await db.query(sql, [nombre, descripcion, precio, imagen, stock, id_categoria, id]);
+    await db.query(sql, [nombre, descripcion, precio, stock, id_categoria, id]);
     res.json({ mensaje: 'Producto actualizado' });
   } catch (err) {
     console.error('❌ Error al actualizar producto:', err.message);
