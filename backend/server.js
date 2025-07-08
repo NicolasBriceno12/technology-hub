@@ -1,25 +1,75 @@
 const express = require('express');
 const cors = require('cors');
-const authRoutes = require('./routes/authRoutes');
-
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
-// Rutas
-app.use('/api', authRoutes);
+// Rutas importadas con verificación
+try {
+  const authRoutes = require('./routes/authRoutes');
+  app.use('/api/auth', authRoutes);
+  console.log('✅ authRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando authRoutes:', err.message);
+}
 
-// Ruta raíz opcional
+try {
+  const clienteRoutes = require('./routes/clienteRoutes');
+  app.use('/api/clientes', clienteRoutes);
+  console.log('✅ clienteRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando clienteRoutes:', err.message);
+}
+
+try {
+  const pqrsRoutes = require('./routes/pqrsRoutes');
+  app.use('/api/pqrs', pqrsRoutes);
+  console.log('✅ pqrsRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando pqrsRoutes:', err.message);
+}
+
+try {
+  const productoRoutes = require('./routes/productoRoutes');
+  app.use('/api/productos', productoRoutes);
+  console.log('✅ productoRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando productoRoutes:', err.message);
+}
+
+try {
+  const rolesRoutes = require('./routes/rolesRoutes');
+  app.use('/api/roles', rolesRoutes);
+  console.log('✅ rolesRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando rolesRoutes:', err.message);
+}
+
+try {
+  const usuarioRoutes = require('./routes/usuarioRoutes');
+  app.use('/api/usuarios', usuarioRoutes);
+  console.log('✅ usuarioRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando usuarioRoutes:', err.message);
+}
+
+try {
+  const ventasRoutes = require('./routes/ventasRoutes');
+  app.use('/api/ventas', ventasRoutes);
+  console.log('✅ ventasRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando ventasRoutes:', err.message);
+}
+
+// Ruta raíz
 app.get('/', (req, res) => {
-  res.send('✅ Servidor backend de TechnologyHub funcionando. Usa /api/login o /api/register');
+  res.send('✅ Backend de TechnologyHub corriendo. Endpoints disponibles en /api/*');
 });
 
 // Puerto
 const PORT = process.env.PORT || 3000;
-
-// Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor ejecutando en http://localhost:${PORT}`);
+  console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
 });
