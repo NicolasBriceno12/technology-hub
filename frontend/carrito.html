@@ -9,6 +9,17 @@
 </head>
 <body>
 
+  <!-- 🔙 BOTÓN VOLVER -->
+  <button class="btn-volver" onclick="window.history.back()" style="margin: 10px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+    fill="currentColor" viewBox="0 0 16 16">
+      <path d="M15 8a.5.5 0 0 1-.5.5H2.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-
+      5a.5.5 0 0 1 0-.708l5-5a.5.5 0 1 1 .708.708L2.707 7.5H14.5a.5.5 0 0 1
+      .5.5z"/>
+    </svg>
+    Volver atrás
+  </button>
+
   <!-- 🧭 ENCABEZADO Y MENÚ -->
   <header>
     <img src="/frontend/img/imagenes/Logo.png" class="logo" />
@@ -51,24 +62,29 @@
   <!-- 🛒 CARRITO FUNCIONAL -->
   <main class="carrito">
 
+    <!-- 🛍️ CATÁLOGO DE PRODUCTOS -->
+    <section class="producto">
+      <h1>Catálogo de Productos</h1>
+      <div id="productos-container"></div>
+    </section>
+
     <!-- 📥 FORMULARIO PARA AGREGAR PRODUCTOS AL CARRITO -->
     <section>
       <h2>Agregar producto al carrito</h2>
       <form id="formAgregarCarrito">
-       <label>Producto:</label>
-    <select id="productoSelect"></select><br>
+        <label>Producto:</label>
+        <select id="productoSelect"></select><br>
 
-    <label>Cantidad:</label>
-    <input type="number" id="cantidad" required><br>
+        <label>Cantidad:</label>
+        <input type="number" id="cantidad" required><br>
 
-    <label>Precio unitario:</label>
-    <input type="number" id="precio" readonly><br>
+        <label>Precio unitario:</label>
+        <input type="number" id="precio" readonly><br>
 
-    <label>Unidades disponibles:</label>
-<input type="number" id="stock_disponible" readonly><br>
+        <label>Unidades disponibles:</label>
+        <input type="number" id="stock_disponible" readonly><br>
 
         <button type="submit" id="btnAgregarProducto" title="Selecciona un producto">Agregar</button>
-        
       </form>
     </section>
 
@@ -92,12 +108,25 @@
     <!-- 💳 MÉTODO DE PAGO Y TOTALES -->
     <section>
       <h2>Método de pago</h2>
-      <select id="metodo_pago"></select>
+      <select id="metodo_pago">
+        <option value="">Seleccione</option>
+        <option value="efectivo">Efectivo</option>
+        <option value="tarjeta">Tarjeta</option>
+        <option value="transferencia">Transferencia</option>
+        <option value="nequi">Nequi</option>
+        <option value="daviplata">Daviplata</option>
+      </select>
 
       <p><strong>Subtotal:</strong> <span id="subtotal">$0</span></p>
       <p><strong>Total:</strong> <span id="total">$0</span></p>
 
+      <div style="margin-top: 10px;">
+        <label for="correo">Correo para recibo:</label>
+        <input type="email" id="correo" placeholder="correo@ejemplo.com">
+      </div>
+
       <button id="btnPagar">Pagar</button>
+      <button id="finalizar-compra">Finalizar Compra</button>
     </section>
 
     <!-- 📄 RECIBO -->
@@ -110,4 +139,3 @@
 
 </body>
 </html>
-

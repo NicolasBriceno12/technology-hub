@@ -1,37 +1,106 @@
-import bcrypt from 'bcrypt';
-import {
-buscarUsuarioPorCorreo,
-crearUsuario,
-obtenerRolPorId
-} from '../models/userModel.js';
-export const register = async (req, res) => {
-const { nombre, correo, contraseña, id_rol } = req.body;
-const userExistente = await buscarUsuarioPorCorreo(correo);
-if (userExistente) {
-return res.status(400).json({ message: 'Correo ya registrado' });
-}
-const hash = await bcrypt.hash(contraseña, 10);
-await crearUsuario(nombre, correo, hash, id_rol);
-res.status(201).json({ message: 'Usuario creado correctamente' });
-};
-export const login = async (req, res) => {
+const bcrypt = require('bcryptjs');
+const conexion = require('../config/db');
+
+// Registro de usuario
+exports.register = async (req, res) => {
   try {
-    const { correo, contraseña } = req.body;
-    const user = await buscarUsuarioPorCorreo(correo);
+    console.log('📥 Registro recibido:', req.body);
+    const {
+      nombres,
+      apellidos,
+      nombre_usuario,
+      correo,
+      contrasena,
+      fecha_nacimiento,
+      ciudad,
+      direccion,
+      telefono,
+      tipo_documento,
+      numero_documento
+    } = req.body;
 
-    if (!user) {
-      return res.status(400).json({ message: 'Usuario no encontrado' });
+    if (!nombres || !apellidos || !nombre_usuario || !correo || !contrasena || !fecha_nacimiento || !ciudad) {
+      return res.status(400).json({ error: 'Faltan campos obligatorios' });
     }
 
-    const esValido = await bcrypt.compare(contraseña, user.contraseña);
-    if (!esValido) {
-      return res.status(401).json({ message: 'Contraseña incorrecta' });
+    // Verificar si el correo o nombre de usuario ya existen
+    const [results] = await conexion.query(
+      'SELECT * FROM usuarios WHERE correo = ? OR nombre_usuario = ?',
+      [correo, nombre_usuario]
+    );
+
+    if (results.length > 0) {
+      return res.status(400).json({ error: 'Correo o nombre de usuario ya registrados' });
     }
 
-    const rol = await obtenerRolPorId(user.id_rol);
-    res.status(200).json({ message: 'Login exitoso', rol });
-  } catch (error) {
-    console.error('Error en login:', error);
-    res.status(500).json({ message: 'Error interno del servidor' });
+    // Encriptar contraseña
+    const hashed = await bcrypt.hash(contrasena, 10);
+
+    // CORREGIDO: Cadena SQL válida
+    const sql = `
+      INSERT INTO usuarios 
+      (id_rol, nombres, apellidos, nombre_usuario, correo, contrasena, fecha_nacimiento, ciudad, direccion, telefono, tipo_documento, numero_documento)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+    const valores = [
+      1, // Rol por defecto: usuario
+      nombres,
+      apellidos,
+      nombre_usuario,
+      correo,
+      hashed,
+      fecha_nacimiento,
+      ciudad,
+      direccion || null,
+      telefono || null,
+      tipo_documento || null,
+      numero_documento || null
+    ];
+
+    await conexion.query(sql, valores);
+
+    res.status(201).json({ mensaje: 'Usuario registrado correctamente' });
+
+  } catch (e) {
+    console.error('❌ Error general registro:', e);
+    res.status(500).json({ error: 'Error del servidor' });
+  }
+};
+
+// Login de usuario
+exports.login = async (req, res) => {
+  try {
+    const { correo, contrasena } = req.body;
+
+    if (!correo || !contrasena) {
+      return res.status(400).json({ error: 'Correo y contraseña son obligatorios' });
+    }
+
+    const [results] = await conexion.query('SELECT * FROM usuarios WHERE correo = ?', [correo]);
+
+    if (results.length === 0) {
+      return res.status(401).json({ error: 'Credenciales inválidas' });
+    }
+
+    const user = results[0];
+    const match = await bcrypt.compare(contrasena, user.contrasena);
+
+    if (!match) {
+      return res.status(401).json({ error: 'Credenciales inválidas' });
+    }
+
+    res.status(200).json({
+      mensaje: 'Login exitoso',
+      usuario: {
+        id: user.id_usuarios,
+        nombre: user.nombres,
+        rol: user.id_rol
+      }
+    });
+
+  } catch (err) {
+    console.error('❌ Error en login:', err);
+    res.status(500).json({ error: 'Error del servidor' });
   }
 };
