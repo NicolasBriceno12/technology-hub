@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="/frontend/css/carrito.css">
+  <link rel="stylesheet" href="/css/carrito.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <title>TechnologyHub - Carrito</title>
 </head>
@@ -13,9 +13,7 @@
   <button class="btn-volver" onclick="window.history.back()" style="margin: 10px;">
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
     fill="currentColor" viewBox="0 0 16 16">
-      <path d="M15 8a.5.5 0 0 1-.5.5H2.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-
-      5a.5.5 0 0 1 0-.708l5-5a.5.5 0 1 1 .708.708L2.707 7.5H14.5a.5.5 0 0 1
-      .5.5z"/>
+      <path d="M15 8a.5.5 0 0 1-.5.5H2.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-5a.5.5 0 0 1 0-.708l5-5a.5.5 0 1 1 .708.708L2.707 7.5H14.5a.5.5 0 0 1 .5.5z"/>
     </svg>
     Volver atrás
   </button>
@@ -61,32 +59,6 @@
 
   <!-- 🛒 CARRITO FUNCIONAL -->
   <main class="carrito">
-
-    <!-- 🛍️ CATÁLOGO DE PRODUCTOS -->
-    <section class="producto">
-      <h1>Catálogo de Productos</h1>
-      <div id="productos-container"></div>
-    </section>
-
-    <!-- 📥 FORMULARIO PARA AGREGAR PRODUCTOS AL CARRITO -->
-    <section>
-      <h2>Agregar producto al carrito</h2>
-      <form id="formAgregarCarrito">
-        <label>Producto:</label>
-        <select id="productoSelect"></select><br>
-
-        <label>Cantidad:</label>
-        <input type="number" id="cantidad" required><br>
-
-        <label>Precio unitario:</label>
-        <input type="number" id="precio" readonly><br>
-
-        <label>Unidades disponibles:</label>
-        <input type="number" id="stock_disponible" readonly><br>
-
-        <button type="submit" id="btnAgregarProducto" title="Selecciona un producto">Agregar</button>
-      </form>
-    </section>
 
     <!-- 🧾 TABLA DEL CARRITO -->
     <section>
