@@ -1,41 +1,75 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const path = require('path');
-
 const app = express();
 
-// Middlewares
+// Middleware
 app.use(cors());
-app.use(bodyParser.json());
 app.use(express.json());
 
-// Servir archivos estáticos del frontend
-app.use('/frontend', express.static(path.join(__dirname, '../frontend')));
-app.use(express.static(path.join(__dirname, '../frontend')));
+// Rutas importadas con verificación
+try {
+  const authRoutes = require('./routes/authRoutes');
+  app.use('/api/auth', authRoutes);
+  console.log('✅ authRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando authRoutes:', err.message);
+}
 
-// Rutas
-const authRoutes = require('./routes/authRoutes');
-app.use('/api', authRoutes);
-app.use('/api/productos', require('./routes/productoRoutes'));
+try {
+  const clienteRoutes = require('./routes/clienteRoutes');
+  app.use('/api/clientes', clienteRoutes);
+  console.log('✅ clienteRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando clienteRoutes:', err.message);
+}
 
-// Ruta principal - redirigir al login
+try {
+  const pqrsRoutes = require('./routes/pqrsRoutes');
+  app.use('/api/pqrs', pqrsRoutes);
+  console.log('✅ pqrsRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando pqrsRoutes:', err.message);
+}
+
+try {
+  const productoRoutes = require('./routes/productoRoutes');
+  app.use('/api/productos', productoRoutes);
+  console.log('✅ productoRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando productoRoutes:', err.message);
+}
+
+try {
+  const rolesRoutes = require('./routes/rolesRoutes');
+  app.use('/api/roles', rolesRoutes);
+  console.log('✅ rolesRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando rolesRoutes:', err.message);
+}
+
+try {
+  const usuarioRoutes = require('./routes/usuarioRoutes');
+  app.use('/api/usuarios', usuarioRoutes);
+  console.log('✅ usuarioRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando usuarioRoutes:', err.message);
+}
+
+try {
+  const ventasRoutes = require('./routes/ventasRoutes');
+  app.use('/api/ventas', ventasRoutes);
+  console.log('✅ ventasRoutes cargado');
+} catch (err) {
+  console.error('❌ Error cargando ventasRoutes:', err.message);
+}
+
+// Ruta raíz
 app.get('/', (req, res) => {
-    res.redirect('/pages/login.html');
+  res.send('✅ Backend de TechnologyHub corriendo. Endpoints disponibles en /api/*');
 });
 
-// Ruta de prueba de la API
-app.get('/api/test', (req, res) => {
-    res.json({ mensaje: 'API funcionando correctamente' });
-});
-
-// Manejo de errores
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Error interno del servidor' });
-});
-
-const PUERTO = 3000;
-app.listen(PUERTO, () => {
-    console.log(`Servidor corriendo en http://localhost:${PUERTO}`);
+// Puerto
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
 });
