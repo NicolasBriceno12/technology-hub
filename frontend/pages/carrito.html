@@ -1,149 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/carrito.css">
-    <title>TechnologyHub</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="/frontend/css/carrito.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <title>TechnologyHub - Carrito</title>
 </head>
 <body>
+
+  <!-- 🔙 BOTÓN VOLVER -->
+  <button class="btn-volver" onclick="window.history.back()" style="margin: 10px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+    fill="currentColor" viewBox="0 0 16 16">
+      <path d="M15 8a.5.5 0 0 1-.5.5H2.707l4.147 4.146a.5.5 0 0 1-.708.708l-5-
+      5a.5.5 0 0 1 0-.708l5-5a.5.5 0 1 1 .708.708L2.707 7.5H14.5a.5.5 0 0 1
+      .5.5z"/>
+    </svg>
+    Volver atrás
+  </button>
+
+  <!-- 🧭 ENCABEZADO Y MENÚ -->
   <header>
-  <img src="../img/imagenes/Logo.png" class="logo" />
-      <div class="lupa">
-        <button><img src="../img/imagenes/iconoLupa.png" alt="" /></button>
-      </div>
-      <input
-        type="text"
-        class="cajaTexto"
-        placeholder="¿Que producto te gustaria buscar?"
-      />
-      <button><img src="../img/Imagenes/iconoCarrito.png" alt="" /></button>
-      
-      <!-- BOTON DE USUARIO -->
+    <img src="/frontend/img/imagenes/Logo.png" class="logo" />
+    <div class="lupa">
+      <button><img src="/frontend/img/imagenes/iconoLupa.png" alt="" /></button>
+    </div>
+    <input type="text" class="cajaTexto" placeholder="¿Qué producto te gustaría buscar?" />
+    <button><img src="/frontend/img/Imagenes/iconoCarrito.png" alt="" /></button>
 
-      <div class="menu_usuario">
-        <input type="checkbox" id="menu-toggle" />
-        <label for="menu-toggle" class="menu-label">
-          <img src="../img/Imagenes/iconoUsuario.png" alt="Menú" />
-        </label>
-        <div class="menu">
-          <a href="inicio.html">USUARIO</a>
-          <a href="gestion_comentarios.html">EMPLEADO</a>
-          <a href="usuarios.html">ADMINISTRADOR</a>
-          <a href="login.html">CERRAR SESION</a>
-        </div>
+    <div class="menu_usuario">
+      <input type="checkbox" id="menu-toggle" />
+      <label for="menu-toggle" class="menu-label">
+        <img src="/frontend/img/Imagenes/iconoUsuario.png" alt="Menú" />
+      </label>
+      <div class="menu">
+        <a href="/frontend/pages/inicio.html">USUARIO</a>
+        <a href="/frontend/pages/gestion_comentarios.html">EMPLEADO</a>
+        <a href="/frontend/pages/usuarios.html">ADMINISTRADOR</a>
+        <a href="/frontend/pages/login.html">CERRAR SESIÓN</a>
       </div>
+    </div>
   </header>
-
-  <!--  MENU DESPLEGABLE NAVEGADOR -->
 
   <nav>
     <ul>
       <li><a href="inicio.html">Inicio</a></li>
       <p class="vl"></p>
-      <li>
-        <a href="../index.html#Electrodomesticos">Electrodomesticos</a>
-        <ul>
-          <li><a href="../index.html#Neveras">Neveras</a></li>
-          <li><a href="../index.html#Aspiradoras">Aspiradoras</a></li>
-          <li><a href="../index.html#Aire-acondicionado">Aire acondicionado</a></li>
-          <li><a href="../index.html#Televisores">Televisores</a></li>
-          <li><a href="../index.html#Teatro-en-casa">Teatro en casa</a></li>
-          <li><a href="../index.html#Microondas">Microondas</a></li>
-          <li><a href="../index.html#Lavadora">Lavadora</a></li>
-          <li>
-            <a href="../index.html#Consola-de-videojuegos">Consola de Videojuegos</a>
-          </li>
-        </ul>
-      </li>
+      <li><a href="index.html#Electrodomesticos">Electrodomésticos</a></li>
       <p class="vl"></p>
-      <li>
-        <a href="../index.html#Perifericos">Perifericos</a>
-        <ul>
-          <li><a href="../index.html#Mouse">Mouse</a></li>
-          <li><a href="../index.html#Teclado">Teclado</a></li>
-          <li><a href="../index.html#Monitor">Monitor</a></li>
-          <li><a href="../index.html#Audifonos">Audifonos</a></li>
-          <li><a href="../index.html#Tableta_Grafica">Tableta Grafica</a></li>
-        </ul>
-      </li>
+      <li><a href="index.html#Perifericos">Periféricos</a></li>
       <p class="vl"></p>
-      <li>
-        <a href="../index.html#Computadores">Computadores</a>
-        <ul>
-          <li><a href="../index.html#Pc_de_torre">Pc de torre</a></li>
-          <li><a href="../index.html#Pc_todo_en_uno">Pc todo en uno</a></li>
-          <li><a href="../index.html#Portatiles">Pc portatil</a></li>
-          <li>
-            <a href="../index.html#Componentes">Componentes</a>
-            <ul>
-              <li><a href="../index.html#Procesadores">Procesadores</a></li>
-              <li><a href="../index.html#Memoria_ram">Memoria ram</a></li>
-              <li><a href="../index.html#Tarjeta_grafica">Tarjetas graficas</a></li>
-              <li><a href="../index.html#Almacenamiento">Almacenamiento</a></li>
-              <li><a href="../index.html#Fuente_de_poder">Fuente de poder</a></li>
-              <li><a href="../index.html#Motherboard">Motherboard</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
+      <li><a href="index.html#Computadores">Computadores</a></li>
       <p class="vl"></p>
-      <li>
-        <a href="../index.html#Smartphones">Smartphones</a>
-        <ul>
-          <li><a href="../index.html#Celulares">Celulares</a></li>
-          <li><a href="../index.html#Tablets">Tablets</a></li>
-        </ul>
-      </li>
+      <li><a href="index.html#Smartphones">Smartphones</a></li>
       <p class="vl"></p>
-      <li><a href="">Servicios</a></li>
+      <li><a href="#">Servicios</a></li>
     </ul>
   </nav>
-  
-      <div class="carrito">
-        <div class="productos">
-          <!-- Producto 1 -->
-          <div class="producto">
-            <span class="eliminar">✖</span>
-            <img src="https://via.placeholder.com/60x30" alt="RAM">
-            <div class="producto-info">
-              <span class="producto-nombre">Memoria RAM</span>
-              <span>$15</span>
-            </div>
-            <div class="cantidad-control">
-              <button onclick="cambiarCantidad('cantidad1', -1)">◄</button>
-              <input id="cantidad1" type="text" value="1" readonly>
-              <button onclick="cambiarCantidad('cantidad1', 1)">►</button>
-            </div>
-          </div>
-    
-          <!-- Producto 2 -->
-          <div class="producto">
-            <span class="eliminar">✖</span>
-            <img src="https://via.placeholder.com/60x60" alt="CPU">
-            <div class="producto-info">
-              <span class="producto-nombre">Procesador Intel</span>
-              <span>$25</span>
-            </div>
-            <div class="cantidad-control">
-              <button onclick="cambiarCantidad('cantidad2', -1)">◄</button>
-              <input id="cantidad2" type="text" value="2" readonly>
-              <button onclick="cambiarCantidad('cantidad2', 1)">►</button>
-            </div>
-          </div>
-        </div>
-    
-        <div class="resumen">
-          <p>Precio 1: $15</p>
-          <p>Precio 2: $25</p>
-          <p>Subtotal: <span id="subtotal">$$$</span></p>
-          <p>Envío: $<span id="envio">5</span></p>
-          <p>Impuestos: $<span id="impuestos">0</span></p>
-          <p><strong>Total: <span id="total">$$$</span></strong></p>
-          <a href="cuestionario_tarjeta.html"><button class="boton-continuar">Continuar</button></a>
-        </div>
+
+  <!-- 🛒 CARRITO FUNCIONAL -->
+  <main class="carrito">
+
+    <!-- 🛍 CATÁLOGO DE PRODUCTOS -->
+    <section class="producto">
+      <h1>Catálogo de Productos</h1>
+      <div id="productos-container"></div>
+    </section>
+
+    <!-- 📥 FORMULARIO PARA AGREGAR PRODUCTOS AL CARRITO -->
+    <section>
+      <h2>Agregar producto al carrito</h2>
+      <form id="formAgregarCarrito">
+        <label>Producto:</label>
+        <select id="productoSelect"></select><br>
+
+        <label>Cantidad:</label>
+        <input type="number" id="cantidad" required><br>
+
+        <label>Precio unitario:</label>
+        <input type="number" id="precio" readonly><br>
+
+        <label>Unidades disponibles:</label>
+        <input type="number" id="stock_disponible" readonly><br>
+
+        <button type="submit" id="btnAgregarProducto" title="Selecciona un producto">Agregar</button>
+      </form>
+    </section>
+
+    <!-- 🧾 TABLA DEL CARRITO -->
+    <section>
+      <h2>Carrito</h2>
+      <table id="tablaCarrito">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+            <th>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- 💳 MÉTODO DE PAGO Y TOTALES -->
+    <section>
+      <h2>Método de pago</h2>
+      <select id="metodo_pago">
+        <option value="">Seleccione</option>
+        <option value="efectivo">Efectivo</option>
+        <option value="tarjeta">Tarjeta</option>
+        
+        <option value="nequi">Nequi</option>
+       
+      </select>
+
+      <p><strong>Subtotal:</strong> <span id="subtotal">$0</span></p>
+      <p><strong>Total:</strong> <span id="total">$0</span></p>
+
+      <div style="margin-top: 10px;">
+        <label for="correo">Correo para recibo:</label>
+        <input type="email" id="correo" placeholder="correo@ejemplo.com">
       </div>
-    
-      <script src="../carrito.js"></script>
+
+      <button id="btnPagar">Pagar</button>
+      <button id="finalizar-compra">Finalizar Compra</button>
+    </section>
+
+    <!-- 📄 RECIBO -->
+    <section id="reciboContainer"></section>
+
+  </main>
+
+  <!-- 📜 SCRIPTS -->
+  <script src="/frontend/js/carrito.js"></script>
+
 </body>
 </html>

@@ -1,77 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-*{
-    margin: 0;
-    padding: 0;
-  }
-  
-  html{
-    scroll-behavior: smooth;
-  }
-  
-  /* HEADER CSS */
-  
-  header {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 110px;
-    position: sticky;
-    top: 0px;
-    z-index: 2;
-    background-color: white;
-  }
+html {
+  scroll-behavior: smooth;
+}
 
-  header h1{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-weight: 1000;
-    font-size: 40px;
-  }
-  
-  header button img {
-    width: 100px;
-    height: 80%;
-    padding: 0px;
-    margin: 5px;
-  }
-  
-  header button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
-  header button:hover {
-    border: 1px;
-  }
-  header button:active {
-    transform: scale(0.9, 0.9);
-  }
-  
-  .logo {
-    width: 100px;
-    height: 90%;
-    margin-left: 30px;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    border-radius: 30px;
-  }
-  
-  .lupa button img {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .cajaTexto {
-    width: 1000px;
-    height: 50px;
-    margin-top: 5px;
-    margin-left: 5px;
-  }
+/* HEADER */
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 110px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: white;
+}
 
-  /* Menu desplegable de usuario */
+header h1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 1000;
+  font-size: 40px;
+}
 
+.logo {
+  width: 100px;
+  height: 90%;
+  margin: 5px 0 10px 30px;
+  border-radius: 30px;
+}
+
+/* Menú desplegable usuario */
 input[type="checkbox"] {
   display: none;
 }
@@ -85,7 +48,7 @@ input[type="checkbox"] {
   display: none;
   background-color: #f1f1f1;
   box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  border: solid #000;
+  border: 1px solid #000;
   min-width: 160px;
   position: absolute;
   z-index: 2;
@@ -114,101 +77,65 @@ input[type="checkbox"]:checked ~ .menu {
   display: inline-block;
 }
 
-  
-  /*  NAV CSS */
-  
-  nav {
-    height: 60px;
-    background-color: rgb(142, 101, 165);
-    position: sticky;
-    top: 110px;
-    z-index: 1;
-    padding-top: 15px;
-  }
-  
-  nav ul li a{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 20px;
-  }
-  
-  /* LISTA DESPLEGABLE */
-  
-  nav ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    list-style: none;
-    margin: 0;
-    gap: 8%;
-  }
-  
-  nav ul a {
-    display: block;
-    color: #000000;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 15px;
-    padding: 10px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
-  nav ul li:hover {
-    background: #7d4096;
-    border-radius: 15px;
-    
-  }
- 
-  .vl {
-    border-left: 2px solid rgb(0, 0, 0);
-    height: 40px;
-  } /* Linea vertical*/
-  
-  
-  /* Contenedor */
+/* NAV */
+nav {
+  height: 60px;
+  background-color: rgb(142, 101, 165);
+  position: sticky;
+  top: 110px;
+  z-index: 1;
+  padding-top: 15px;
+}
 
-  .Contenedor{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 5%;
-    margin-top: 2%;
-    margin-bottom: 0;
-    height: 630px;
-    width: 90%;
-    background-color: #9d9a9e;
-    border:solid #000000;
-    border-radius: 20px;
-  }
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  gap: 8%;
+}
 
+nav ul li a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav ul li:hover {
+  background: #7d4096;
+  border-radius: 15px;
+}
+
+.vl {
+  border-left: 2px solid black;
+  height: 40px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.Contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2% auto 0;
+  padding-bottom: 20px;
+  width: 90%;
+  background-color: #9d9a9e;
+  border: solid black;
+  border-radius: 20px;
+}
+
+/* Sección Superior */
 .superior {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  width: 90% ;
-  padding-top: 3%;
-}
-
-.izquierda {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.logo-contenedor {
-  width: 60px;
-  height: 60px;
-  border-radius: 10px;
-}
-
-.buscador {
-  padding: 10px;
-  font-size: 16px;
-  width: 250px;
+  width: 90%;
+  margin: 20px 0;
 }
 
 .texto-superior {
@@ -217,41 +144,132 @@ input[type="checkbox"]:checked ~ .menu {
   color: #333;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-  
 
-  /* TABLA */
+/* Botón agregar */
+.superior button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #5e35b1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
 
-  .tabla-excel {
-    width: 90%;
-    height: 60%;
-    margin: 30px auto;
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  
-  .tabla-excel th, .tabla-excel td {
-    border: 1px solid #000000;
-    padding: 12px;
-    text-align: center;
-  }
-  
-  .tabla-excel thead {
-    background-color: #b487f0; /* color similar a encabezado de Excel */
-  }
-  
-  .tabla-excel tbody tr:nth-child(even) {
-    background-color: #9eb9c9; /* filas alternadas */
-  }
+.superior button:hover {
+  background-color: #7e57c2;
+}
 
-  .tabla-excel tbody{
-    background-color: #ffffff;
-    height: 50px;
-  }
+/* TABLA */
+.tabla-excel {
+  width: 90%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
 
-  td img{
-    height: 40px;
-    padding: 0;
-  }
-  
-  
+.tabla-excel th, .tabla-excel td {
+  border: 1px solid black;
+  padding: 12px;
+  text-align: center;
+}
+
+.tabla-excel thead {
+  background-color: #b487f0;
+}
+
+.tabla-excel tbody tr:nth-child(even) {
+  background-color: #9eb9c9;
+}
+
+.tabla-excel tbody {
+  background-color: #fff;
+}
+
+.tabla-excel button {
+  padding: 6px 12px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.tabla-excel button:hover {
+  background-color: #2196f3;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-contenido {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 25px 30px;
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.modal-contenido h2 {
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.modal-contenido label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.modal-contenido input,
+.modal-contenido select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.modal-contenido button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.modal-contenido button:hover {
+  background-color: #66bb6a;
+}
+
+.cerrar {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s;
+}
+
+.cerrar:hover {
+  color: #000;
+}
