@@ -1,74 +1,132 @@
 /* login.css */
 
 body.formularios {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #5e3c99, #8e44ad);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  background-color: #7d4096;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
+/* Contenedor blanco centrado */
 .logincontainer {
-    background-color: #ffffff;
-    color: #4b0082;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+  background-color: white;
+  border-radius: 15px;
+  padding: 40px 30px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+  width: 400px;
+  max-width: 90%;
+  text-align: center;
 }
 
 .logincontainer h1 {
-    margin-bottom: 10px;
-    font-size: 2em;
-    color: #5e3c99;
+  margin-bottom: 10px;
+  color: #4a154b;
 }
 
 .logincontainer hr {
-    border: none;
-    height: 2px;
-    background-color: #5e3c99;
-    margin: 10px 0 20px;
+  border: none;
+  height: 2px;
+  background-color: #caa4e2;
+  margin-bottom: 25px;
 }
 
-input[type="email"],
-input[type="password"] {
-    width: 90%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1em;
+/* Inputs */
+#formLogin input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
+#formLogin input:focus {
+  border-color: #9e57c8;
+}
+
+/* Contraseña con ojo */
 .password-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .password-container input {
-    width: 100%;
+  flex: 1;
 }
 
-.password-container .icono-ojo {
-    position: absolute;
-    right: 15px;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
+.icono-ojo {
+  position: absolute;
+  right: 10px;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  opacity: 0.8;
 }
 
-.btnlogin {   
-    width: 90%;
-    padding: 12px;
-    margin-top: 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 1em;
-    cursor: pointer;}
+/* Botones */
+.btnlogin {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btnlogin.ingresar {
+  background-color: #9e57c8;
+  color: white;
+}
+
+.btnlogin.ingresar:hover {
+  background-color: #7d4096;
+}
+
+.btnlogin.registrar {
+  background-color: #e0d1ed;
+  color: #4a154b;
+}
+
+.btnlogin.registrar:hover {
+  background-color: #d0b9e6;
+}
+
+/* Iconos sociales */
+.iconslogin {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.iconslogin button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.iconslogin img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.iconslogin img:hover {
+  transform: scale(1.1);
+}
+
+/* Mensaje */
+#mensaje {
+  font-size: 14px;
+}

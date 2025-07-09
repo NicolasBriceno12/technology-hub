@@ -188,119 +188,104 @@ input[type="checkbox"]:checked ~ .menu {
     scroll-margin-top: 280px;
   }
   
-  /* BODY */
-
-  .columnas {
+  /* Estructura de columnas principales */
+main.columnas {
   display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 30px;
   gap: 40px;
-  background-color: #f9f9fb;
-  min-height: 90vh;
+  background-color: #f4f4f4;
+  min-height: calc(100vh - 170px); /* Ajusta según el alto del header/nav */
 }
 
-/* FORMULARIO DE USUARIO */
-.izquierda {
-  width: 60%;
+/* FORMULARIO IZQUIERDA */
+.formulario-usuario {
+  background-color: white;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  width: 40%;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  gap: 15px;
 }
 
-.izquierda h3 {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #333;
+.formulario-usuario h3 {
+  margin-bottom: 20px;
+  color: #4a154b;
   text-align: center;
 }
 
-.izquierda input {
-  height: 45px;
-  width: 100%;
+.formulario-usuario input {
+  margin-bottom: 15px;
+  padding: 10px;
   font-size: 16px;
-  padding: 10px 15px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 8px;
+  border: 1.5px solid #ccc;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.formulario-usuario input:focus {
+  border-color: #9e57c8;
 }
 
 .botones-crud {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  gap: 10px;
   margin-top: 15px;
-  flex-wrap: wrap;
-  gap: 15px;
 }
 
 .boton {
-  height: 45px;
-  width: 30%;
-  background-color: #b487f0;
-  color: #fff;
+  padding: 12px;
   border: none;
-  font-size: 16px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border-radius: 10px;
+  background-color: #9e57c8;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .boton:hover {
-  background-color: #a46ae0;
-  transform: scale(1.03);
+  background-color: #7d4096;
 }
 
-.boton:active {
-  transform: scale(0.95);
+/* TABLA DERECHA */
+.tabla-container {
+  background-color: white;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  width: 55%;
+  overflow-x: auto;
 }
 
-/* TABLA DE USUARIOS */
-.derecha {
-  width: 40%;
-  background-color: #ffffff;
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.derecha h3 {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 24px;
+.tabla-container h3 {
   margin-bottom: 20px;
+  color: #4a154b;
   text-align: center;
-  color: #333;
 }
 
 .tabla-excel {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  box-shadow: 0 0 10px rgba(0,0,0,0.08);
-  border-radius: 10px;
-  overflow: hidden;
 }
 
 .tabla-excel th,
 .tabla-excel td {
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   padding: 10px;
   text-align: center;
+  font-size: 14px;
 }
 
-.tabla-excel thead {
-  background-color: #d9b9f0;
-  color: #000;
-}
-
-.tabla-excel tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
+.tabla-excel th {
+  background-color: #d8c1e9;
+  color: #1f003b;
 }
 
 .tabla-excel tbody tr:hover {
-  background-color: #e5d4f5;
-  transition: background-color 0.2s ease-in-out;
+  background-color: #f3e9fb;
 }
