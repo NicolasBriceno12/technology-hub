@@ -28,11 +28,11 @@
 
   <nav>
     <ul>
-      <li><a href="gestion_comentarios.html">GESTION DE COMENTARIOS</a></li>
+      <li><a href="gestion_comentarios.html">GESTIÓN DE COMENTARIOS</a></li>
       <p class="vl"></p>
-      <li><a href="gestion_inventario.html">GESTION DE INVENTARIO</a></li>
+      <li><a href="gestion_inventario.html">GESTIÓN DE INVENTARIO</a></li>
       <p class="vl"></p>
-      <li><a href="gestion_ventas.html">GESTION DE VENTAS</a></li>
+      <li><a href="gestion_ventas.html">GESTIÓN DE VENTAS</a></li>
     </ul>
   </nav>
 
@@ -40,10 +40,7 @@
     <div class="Contenedor">
       <div class="superior">
         <p class="texto-superior">GESTIÓN DE VENTAS</p>
-        <div class="izquierda">
-          <img src="Imagenes/iconoLupa.png" alt="Buscar" class="logo-contenedor"/>
-          <input type="text" placeholder="Ingrese el número de la venta" class="buscador" />
-        </div>
+        <button onclick="abrirModalAgregar()">Agregar Venta</button>
       </div>
 
       <table class="tabla-excel">
@@ -71,10 +68,11 @@
   <!-- Modal editar -->
   <div id="modalEditarVenta" class="modal" style="display:none;">
     <div class="modal-contenido">
-      <span class="cerrar" onclick="cerrarModal()">&times;</span>
+      <span class="cerrar" onclick="cerrarModalEditar()">&times;</span>
       <h2>Editar Venta</h2>
       <form id="formEditarVenta">
         <input type="hidden" id="edit-id_venta" />
+        
         <label>Descripción:</label>
         <input type="text" id="edit-descripcion" />
 
@@ -87,6 +85,32 @@
         </select>
 
         <button type="submit">Guardar cambios</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal agregar -->
+  <div id="modalAgregarVenta" class="modal" style="display:none;">
+    <div class="modal-contenido">
+      <span class="cerrar" onclick="cerrarModalAgregar()">&times;</span>
+      <h2>Agregar Nueva Venta</h2>
+      <form id="formAgregarVenta">
+        <label># de Venta (ID):</label>
+        <input type="number" id="add-id_venta" required />
+
+        <label>Descripción:</label>
+        <input type="text" id="add-descripcion" required />
+
+        <label>Estado:</label>
+        <select id="add-estado" required>
+          <option value="">Seleccione estado</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="envio">Envío</option>
+          <option value="completado">Completado</option>
+          <option value="cancelado">Cancelado</option>
+        </select>
+
+        <button type="submit">Agregar Venta</button>
       </form>
     </div>
   </div>
@@ -108,7 +132,7 @@
             <td>${v.id_venta}</td>
             <td>${v.descripcion}</td>
             <td>${v.estado}</td>
-            <td><button onclick='abrirModal(${JSON.stringify(v)})'>Editar</button></td>
+            <td><button onclick='abrirModalEditar(${JSON.stringify(v)})'>Editar</button></td>
           `;
           tbody.appendChild(tr);
         });
@@ -118,14 +142,14 @@
       }
     }
 
-    function abrirModal(venta) {
+    function abrirModalEditar(venta) {
       document.getElementById('modalEditarVenta').style.display = 'block';
       document.getElementById('edit-id_venta').value = venta.id_venta;
       document.getElementById('edit-descripcion').value = venta.descripcion;
       document.getElementById('edit-estado').value = venta.estado;
     }
 
-    function cerrarModal() {
+    function cerrarModalEditar() {
       document.getElementById('modalEditarVenta').style.display = 'none';
     }
 
@@ -144,10 +168,40 @@
 
       if (res.ok) {
         alert('Venta actualizada');
-        cerrarModal();
+        cerrarModalEditar();
         cargarVentas();
       } else {
         alert('Error al actualizar');
+      }
+    });
+
+    function abrirModalAgregar() {
+      document.getElementById('modalAgregarVenta').style.display = 'block';
+    }
+
+    function cerrarModalAgregar() {
+      document.getElementById('modalAgregarVenta').style.display = 'none';
+    }
+
+    document.getElementById('formAgregarVenta').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const id_venta = document.getElementById('add-id_venta').value;
+      const descripcion = document.getElementById('add-descripcion').value;
+      const estado = document.getElementById('add-estado').value;
+
+      const res = await fetch('/api/gestion_ventas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id_venta, descripcion, estado })
+      });
+
+      if (res.ok) {
+        alert('Venta agregada');
+        cerrarModalAgregar();
+        cargarVentas();
+      } else {
+        alert('Error al agregar venta');
       }
     });
 
