@@ -1,34 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/frontend/css/gestion_ventas.css" />
-    <title>TechnologyHub</title>
-  </head>
-  <body>
-    <!-- ENCABEZADO DE LA PAGINA -->
-
-    <header>
-      <img class="logo" src="/frontend/img/Imagenes/Logo.png">
-      <h1>MENÚ DE EMPLEADOS</h1>
-      <div class="iconoUsuario">
-      
-          <!-- BOTON DE USUARIO -->
-
-    <div class="menu_usuario">
-      <input type="checkbox" id="menu-toggle" />
-      <label for="menu-toggle" class="menu-label">
-        <img src="/frontend/img/Imagenes/iconoUsuario.png" alt="Menú" />
-      </label>
-      <div class="menu">
-        <a href="inicio.html">USUARIO</a>
-        <a href="gestion_comentarios.html">EMPLEADO</a>
-        <a href="usuarios.html">ADMINISTRADOR</a>
-        <a href="login.html">CERRAR SESION</a>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="/css/gestion_ventas.css" />
+  <title>TechnologyHub - Gestión de Ventas</title>
+</head>
+<body>
+  <header>
+    <img class="logo" src="imagenes3/Logo.png">
+    <h1>MENÚ DE EMPLEADOS</h1>
+    <div class="iconoUsuario">
+      <div class="menu_usuario">
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="menu-label">
+          <img src="Imagenes/iconoUsuario.png" alt="Menú" />
+        </label>
+        <div class="menu">
+          <a href="inicio.html">USUARIO</a>
+          <a href="gestion_comentarios.html">EMPLEADO</a>
+          <a href="usuarios.html">ADMINISTRADOR</a>
+          <a href="login.html">CERRAR SESION</a>
+        </div>
       </div>
     </div>
-      </div>
   </header>
 
   <nav>
@@ -41,86 +36,122 @@
     </ul>
   </nav>
 
-    <main>
-      <div class="Contenedor">
-        <div class="superior">
-          <p class="texto-superior">GESTION DE VENTAS</p>
-          <div class="izquierda">
-            <a href=""><img
-              src="/frontend/img/Imagenes/iconoLupa.png"
-              alt="Logo"
-              class="logo-contenedor"
-            /></a>
-            <input type="text" placeholder="Ingrese el numero de la venta" class="buscador" />
-          </div>
+  <main>
+    <div class="Contenedor">
+      <div class="superior">
+        <p class="texto-superior">GESTIÓN DE VENTAS</p>
+        <div class="izquierda">
+          <img src="Imagenes/iconoLupa.png" alt="Buscar" class="logo-contenedor"/>
+          <input type="text" placeholder="Ingrese el número de la venta" class="buscador" />
         </div>
-        <table class="tabla-excel">
-          <colgroup>
-            <col style="width: 10%" />
-            <col style="width: 50%" />
-            <col style="width: 30%" />
-            <col style="width: 5%" />
-          </colgroup>
-          <thead>
-            <tr>
-              <th># de venta</th>
-              <th>Descripcion</th>
-              <th>Estado</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Descripcion venta 1</td>
-              <td>Completado</td>
-              <td><a href="ventas.html"><img src="/frontend/img/Imagenes/iconoLupa.png" alt=""></a></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Descripcion venta 2</td>
-              <td>Enviado</td>
-              <td><a href="ventas.html"><img src="/frontend/img/Imagenes/iconoLupa.png" alt=""></a></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Descripcion venta 3</td>
-              <td>Cancelado</td>
-              <td><a href="ventas.html"><img src="/frontend/img/Imagenes/iconoLupa.png" alt=""></a></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
       </div>
-    </main>
-  </body>
+
+      <table class="tabla-excel">
+        <colgroup>
+          <col style="width: 10%" />
+          <col style="width: 50%" />
+          <col style="width: 25%" />
+          <col style="width: 15%" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th># de venta</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Ver</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-ventas">
+          <!-- Las filas se cargarán dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Modal editar -->
+  <div id="modalEditarVenta" class="modal" style="display:none;">
+    <div class="modal-contenido">
+      <span class="cerrar" onclick="cerrarModal()">&times;</span>
+      <h2>Editar Venta</h2>
+      <form id="formEditarVenta">
+        <input type="hidden" id="edit-id_venta" />
+        <label>Descripción:</label>
+        <input type="text" id="edit-descripcion" />
+
+        <label>Estado:</label>
+        <select id="edit-estado">
+          <option value="pendiente">Pendiente</option>
+          <option value="envio">Envío</option>
+          <option value="completado">Completado</option>
+          <option value="cancelado">Cancelado</option>
+        </select>
+
+        <button type="submit">Guardar cambios</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const tbody = document.getElementById('tabla-ventas');
+
+    async function cargarVentas() {
+      try {
+        const res = await fetch('/api/gestion_ventas');
+        const ventas = await res.json();
+
+        tbody.innerHTML = '';
+
+        ventas.forEach(v => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${v.id_venta}</td>
+            <td>${v.descripcion}</td>
+            <td>${v.estado}</td>
+            <td><button onclick='abrirModal(${JSON.stringify(v)})'>Editar</button></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (error) {
+        alert('Error al cargar ventas');
+        console.error(error);
+      }
+    }
+
+    function abrirModal(venta) {
+      document.getElementById('modalEditarVenta').style.display = 'block';
+      document.getElementById('edit-id_venta').value = venta.id_venta;
+      document.getElementById('edit-descripcion').value = venta.descripcion;
+      document.getElementById('edit-estado').value = venta.estado;
+    }
+
+    function cerrarModal() {
+      document.getElementById('modalEditarVenta').style.display = 'none';
+    }
+
+    document.getElementById('formEditarVenta').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const id = document.getElementById('edit-id_venta').value;
+      const descripcion = document.getElementById('edit-descripcion').value;
+      const estado = document.getElementById('edit-estado').value;
+
+      const res = await fetch(`/api/gestion_ventas/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ descripcion, estado })
+      });
+
+      if (res.ok) {
+        alert('Venta actualizada');
+        cerrarModal();
+        cargarVentas();
+      } else {
+        alert('Error al actualizar');
+      }
+    });
+
+    window.onload = cargarVentas;
+  </script>
+</body>
 </html>
