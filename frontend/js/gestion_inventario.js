@@ -7,6 +7,7 @@ async function cargarProductos() {
 
   tabla.innerHTML = '';
   productos.forEach(p => {
+    p.id = p.id || p.id_producto;
   console.log('Producto recibido:', p); // 👈 esto imprimirá cada objeto
 
   const fila = document.createElement('tr');
@@ -63,6 +64,13 @@ async function eliminarProducto(id) {
 }
 
 async function llenarFormulario(p) {
+
+  if (!p.id) {
+    console.error('❌ El producto no tiene ID válido:', p);
+    alert('Error: el producto seleccionado no tiene un ID válido.');
+    return;
+  }
+
   document.getElementById('id_producto').value = p.id;
   document.getElementById('nombre').value = p.nombre;
   document.getElementById('descripcion').value = p.descripcion;

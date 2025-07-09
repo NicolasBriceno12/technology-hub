@@ -95,3 +95,27 @@ exports.getCategorias = async (req, res) => {
     res.status(500).json({ error: err });
   }
 };
+
+exports.obtenerProductosConCategoria = async (req, res) => {
+  const query = `
+    SELECT 
+      p.id_producto AS id,
+      p.nombre,
+      p.descripcion,
+      p.precio,
+      p.stock,
+      p.imagen,
+      p.id_categoria,
+      c.nombre AS categoria
+    FROM productos p
+    JOIN categorias c ON p.id_categoria = c.id_categoria
+  `;
+
+  try {
+    const [results] = await db.query(query);
+    res.json(results);
+  } catch (err) {
+    console.error("❌ Error al obtener productos:", err);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+};

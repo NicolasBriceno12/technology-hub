@@ -2,12 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const app = express();
+const productoRoutes = require("./routes/productoRoutes");
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/img/uploads', express.static(path.resolve(__dirname, '../frontend/img/imagenes/uploads')));
+app.use("/api", productoRoutes);
 
 // Rutas importadas con verificación
 try {
